@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.suzumaze.intellijqiqplugin.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.suzumaze.intellijqiqplugin.MyBundle
 
 class MyApplicationService {
 
