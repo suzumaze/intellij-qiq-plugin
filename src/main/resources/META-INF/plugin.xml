@@ -1,18 +1,17 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.suzumaze.intellijqiqplugin</id>
-    <name>intellij-qiq-plugin</name>
+    <name>Qiq</name>
     <vendor>suzumaze</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.suzumaze.intellijqiqplugin.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.suzumaze.intellijqiqplugin.services.MyProjectService"/>
+        <fileType
+                name="Qiq File"
+                implementationClass="org.intellij.sdk.language.QiqFileType"
+                fieldName="INSTANCE"
+                language="Qiq"
+                extensions="qiq.php"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.suzumaze.intellijqiqplugin.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 </idea-plugin>
