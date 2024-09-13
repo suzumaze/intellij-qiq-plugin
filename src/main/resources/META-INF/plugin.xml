@@ -17,14 +17,4 @@
                 language="Qiq"
                 implementationClass="com.github.suzumaze.intellijqiqplugin.QiqParserDefinition"/>
     </extensions>
-
-    <resource-bundle>messages.MyBundle</resource-bundle>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.suzumaze.intellijqiqplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-    </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.suzumaze.intellijqiqplugin.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
 </idea-plugin>
