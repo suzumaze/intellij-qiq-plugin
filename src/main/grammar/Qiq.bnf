@@ -1,0 +1,20 @@
+{
+  parserClass="com.github.suzumaze.intellijqiqplugin.parser.QiqParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Qiq"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.github.suzumaze.intellijqiqplugin.psi"
+  psiImplPackage="com.github.suzumaze.intellijqiqplugin.psi.impl"
+
+  elementTypeHolderClass="com.github.suzumaze.intellijqiqplugin.psi.QiqTypes"
+  elementTypeClass="com.github.suzumaze.intellijqiqplugin.psi.QiqElementType"
+  tokenTypeClass="com.github.suzumaze.intellijqiqplugin.psi.QiqTokenType"
+}
+
+qiqFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY

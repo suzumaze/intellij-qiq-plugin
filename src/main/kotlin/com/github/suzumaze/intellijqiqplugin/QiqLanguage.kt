@@ -4,4 +4,5 @@ import com.intellij.lang.Language
 
 object QiqLanguage : Language("Qiq") {
     private fun readResolve(): Any = QiqLanguage
+    val INSTANCE: QiqLanguage = QiqLanguage
 }

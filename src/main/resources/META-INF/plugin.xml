@@ -13,6 +13,9 @@
                 fieldName="INSTANCE"
                 language="Qiq"
                 extensions="qiq"/>
+        <lang.parserDefinition
+                language="Qiq"
+                implementationClass="com.github.suzumaze.intellijqiqplugin.QiqParserDefinition"/>
     </extensions>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
