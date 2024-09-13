@@ -16,5 +16,10 @@
         <lang.parserDefinition
                 language="Qiq"
                 implementationClass="com.github.suzumaze.intellijqiqplugin.QiqParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="Qiq"
+                implementationClass="com.github.suzumaze.intellijqiqplugin.QiqSyntaxHighlighterFactory"/>
+        <colorSettingsPage
+                implementation="com.github.suzumaze.intellijqiqplugin.QiqColorSettingsPage"/>
     </extensions>
 </idea-plugin>
