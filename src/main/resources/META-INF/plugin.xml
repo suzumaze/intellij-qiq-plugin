@@ -1,10 +1,19 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.suzumaze.intellijqiqplugin</id>
-    <name>intellij-qiq-plugin</name>
+    <name>Qiq</name>
     <vendor>suzumaze</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType
+                name="Qiq File"
+                implementationClass="com.github.suzumaze.intellijqiqplugin.QiqFileType"
+                fieldName="INSTANCE"
+                language="Qiq"
+                extensions="qiq"/>
+    </extensions>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
