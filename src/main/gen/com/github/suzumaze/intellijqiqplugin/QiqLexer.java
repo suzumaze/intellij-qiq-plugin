@@ -65,9 +65,7 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_CMAP_BLOCKS = zzUnpackcmap_blocks();
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
-    "\11\0\1\1\1\2\2\1\1\3\22\0\1\1\34\0"+
-    "\1\4\75\0\1\5\1\0\1\6\7\0\1\1\u01a2\0"+
-    "\2\1\326\0";
+    "\75\0\1\1\75\0\1\2\1\0\1\3\u0282\0";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[768];
@@ -94,11 +92,10 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\2\0\1\1\2\2\1\1\1\3\1\1\1\4\1\5"+
-    "\1\6";
+    "\2\0\1\1\1\2\1\3\1\2\1\4\1\5\1\6";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[11];
+    int [] result = new int[9];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -123,11 +120,11 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\7\0\16\0\16\0\25\0\34\0\43\0\52"+
-    "\0\61\0\16\0\16";
+    "\0\0\0\4\0\10\0\14\0\20\0\24\0\30\0\34"+
+    "\0\34";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[11];
+    int [] result = new int[9];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -150,12 +147,12 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\3\2\4\1\5\1\3\1\6\1\3\6\7\1\10"+
-    "\11\0\1\4\11\0\1\11\1\0\6\7\7\0\1\12"+
-    "\4\0\1\13\2\0";
+    "\2\3\1\4\1\3\3\5\1\6\2\3\1\0\1\3"+
+    "\2\0\1\7\1\0\3\5\4\0\1\10\1\0\1\11"+
+    "\6\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[56];
+    int [] result = new int[32];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -193,10 +190,10 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\2\0\2\11\5\1\2\11";
+    "\2\0\5\1\2\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[11];
+    int [] result = new int[9];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -523,7 +520,7 @@ class QiqLexer implements FlexLexer {
           // fall through
           case 7: break;
           case 2:
-            { return TokenType.WHITE_SPACE;
+            { return TokenType.BAD_CHARACTER;
             }
           // fall through
           case 8: break;

@@ -14,6 +14,6 @@ class QiqEditorHighlighterProvider : EditorHighlighterProvider {
         virtualFile: VirtualFile?,
         editorColorsScheme: EditorColorsScheme
     ): EditorHighlighter {
-        return QiqLayeredLexerEditorHighlighter(project, virtualFile, editorColorsScheme)
+        return QiqLayeredLexerEditorHighlighter(editorColorsScheme)
     }
 }

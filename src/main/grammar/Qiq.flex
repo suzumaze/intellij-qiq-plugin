@@ -29,6 +29,7 @@ QIQ_CLOSING_TAG="}}"
 <YYINITIAL> {
   {QIQ_OPENING_TAG}            { yybegin(PHP_CONTENT); return QiqTypes.QIQ_OPENING_TAG; }
   {QIQ_ECHO_OPENING_TAG}       { yybegin(PHP_CONTENT); return QiqTypes.QIQ_ECHO_OPENING_TAG; }
+  [^{]+                        { return QiqTypes.CONTENT; }
 }
 
 <PHP_CONTENT> {
@@ -39,4 +40,4 @@ QIQ_CLOSING_TAG="}}"
 {WHITE_SPACE}                 { return TokenType.WHITE_SPACE; }
 {CRLF}                        { return TokenType.WHITE_SPACE; }
 
-[^]                           { return QiqTypes.CONTENT; }
+[^]                           { return TokenType.BAD_CHARACTER; }
