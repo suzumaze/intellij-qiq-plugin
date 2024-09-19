@@ -7,6 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public class QiqVisitor extends PsiElementVisitor {
 
+  public void visitPhpBlock(@NotNull QiqPhpBlock o) {
+    visitPsiElement(o);
+  }
+
   public void visitProperty(@NotNull QiqProperty o) {
     visitPsiElement(o);
   }

@@ -8,5 +8,5 @@ import com.intellij.psi.FileViewProvider
 
 class QiqFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, QiqLanguage.INSTANCE) {
     override fun getFileType(): FileType = QiqFileType
-    override fun toString(): String = "Qiq File"
+    override fun toString(): String = "Qiq"
 }

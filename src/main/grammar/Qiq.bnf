@@ -15,6 +15,9 @@
 
 qiqFile ::= item_*
 
-private item_ ::= (property|COMMENT|CRLF)
+private item_ ::= (property|CRLF|PHP_BLOCK)
 
 property ::= (KEY? SEPARATOR VALUE?) | KEY
+
+PHP_BLOCK ::= QIQ_OPENING_TAG PHP_CONTENT QIQ_CLOSING_TAG
+             | QIQ_ECHO_OPENING_TAG PHP_CONTENT QIQ_CLOSING_TAG

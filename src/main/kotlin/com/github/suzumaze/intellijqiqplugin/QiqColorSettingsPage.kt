@@ -11,10 +11,7 @@ class QiqColorSettingsPage : ColorSettingsPage {
 
     companion object {
         private val DESCRIPTORS = arrayOf(
-            AttributesDescriptor("Key", QiqSyntaxHighlighter.KEY),
-            AttributesDescriptor("Separator", QiqSyntaxHighlighter.SEPARATOR),
-            AttributesDescriptor("Value", QiqSyntaxHighlighter.VALUE),
-            AttributesDescriptor("Bad value", QiqSyntaxHighlighter.BAD_CHARACTER)
+            AttributesDescriptor("Qiq tag", QiqSyntaxHighlighter.QIQ_TAG),
         )
     }
 
@@ -28,18 +25,8 @@ class QiqColorSettingsPage : ColorSettingsPage {
 
     override fun getDemoText(): String {
         return """
-            # You are reading the ".properties" entry.
-            ! The exclamation mark can also mark text as comments.
-            website = https://en.wikipedia.org/
-            language = English
-            # The backslash below tells the application to continue reading
-            # the value onto the next line.
-            message = Welcome to \
-                      Wikipedia!
-            # Add spaces to the key
-            key\ with\ spaces = This is the value that could be looked up with the key "key with spaces".
-            # Unicode
-            tab : \u0009
+            {{ php }}
+            <title>{{ $this }}</title>
         """.trimIndent()
     }
 

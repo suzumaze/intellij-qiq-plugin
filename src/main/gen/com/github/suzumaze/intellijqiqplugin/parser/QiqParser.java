@@ -36,13 +36,27 @@ public class QiqParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // property|COMMENT|CRLF
+  // QIQ_OPENING_TAG PHP_CONTENT QIQ_CLOSING_TAG
+  //              | QIQ_ECHO_OPENING_TAG PHP_CONTENT QIQ_CLOSING_TAG
+  public static boolean PHP_BLOCK(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "PHP_BLOCK")) return false;
+    if (!nextTokenIs(b, "<php block>", QIQ_ECHO_OPENING_TAG, QIQ_OPENING_TAG)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, PHP_BLOCK, "<php block>");
+    r = parseTokens(b, 0, QIQ_OPENING_TAG, PHP_CONTENT, QIQ_CLOSING_TAG);
+    if (!r) r = parseTokens(b, 0, QIQ_ECHO_OPENING_TAG, PHP_CONTENT, QIQ_CLOSING_TAG);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // property|CRLF|PHP_BLOCK
   static boolean item_(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "item_")) return false;
     boolean r;
     r = property(b, l + 1);
-    if (!r) r = consumeToken(b, COMMENT);
     if (!r) r = consumeToken(b, CRLF);
+    if (!r) r = PHP_BLOCK(b, l + 1);
     return r;
   }
 
