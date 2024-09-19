@@ -11,6 +11,7 @@ public interface QiqTypes {
   IElementType PHP_BLOCK = new QiqElementType("PHP_BLOCK");
   IElementType PROPERTY = new QiqElementType("PROPERTY");
 
+  IElementType CONTENT = new QiqTokenType("CONTENT");
   IElementType CRLF = new QiqTokenType("CRLF");
   IElementType KEY = new QiqTokenType("KEY");
   IElementType PHP_CONTENT = new QiqTokenType("PHP_CONTENT");

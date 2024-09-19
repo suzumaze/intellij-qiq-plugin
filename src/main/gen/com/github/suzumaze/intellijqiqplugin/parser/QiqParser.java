@@ -50,13 +50,14 @@ public class QiqParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // property|CRLF|PHP_BLOCK
+  // property|CRLF|PHP_BLOCK|CONTENT
   static boolean item_(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "item_")) return false;
     boolean r;
     r = property(b, l + 1);
     if (!r) r = consumeToken(b, CRLF);
     if (!r) r = PHP_BLOCK(b, l + 1);
+    if (!r) r = consumeToken(b, CONTENT);
     return r;
   }
 

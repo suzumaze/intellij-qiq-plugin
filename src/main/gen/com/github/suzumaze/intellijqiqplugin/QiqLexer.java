@@ -519,7 +519,7 @@ class QiqLexer implements FlexLexer {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { return PhpTokenTypes.HTML;
+            { return QiqTypes.CONTENT;
             }
           // fall through
           case 7: break;

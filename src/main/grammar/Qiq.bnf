@@ -15,7 +15,7 @@
 
 qiqFile ::= item_*
 
-private item_ ::= (property|CRLF|PHP_BLOCK)
+private item_ ::= (property|CRLF|PHP_BLOCK|CONTENT)
 
 property ::= (KEY? SEPARATOR VALUE?) | KEY
 

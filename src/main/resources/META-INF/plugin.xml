@@ -22,5 +22,6 @@
                 implementationClass="com.github.suzumaze.intellijqiqplugin.QiqSyntaxHighlighterFactory"/>
         <colorSettingsPage
                 implementation="com.github.suzumaze.intellijqiqplugin.QiqColorSettingsPage"/>
+        <editorHighlighterProvider filetype="Qiq" implementationClass="com.github.suzumaze.intellijqiqplugin.QiqEditorHighlighterProvider"/>
     </extensions>
 </idea-plugin>

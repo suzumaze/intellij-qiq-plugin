@@ -40,4 +40,4 @@ QIQ_CLOSING_TAG="}}"
 {WHITE_SPACE}                 { return TokenType.WHITE_SPACE; }
 {CRLF}                        { return TokenType.WHITE_SPACE; }
 
-[^]                           { return PhpTokenTypes.HTML; }
+[^]                           { return QiqTypes.CONTENT; }
