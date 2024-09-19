@@ -6,6 +6,6 @@ import javax.swing.Icon
 object QiqFileType : LanguageFileType(QiqLanguage) {
     override fun getName() = "Qiq"
     override fun getDescription() = "Qiq template file"
-    override fun getDefaultExtension() = "qiq"
+    override fun getDefaultExtension() = "php"
     override fun getIcon(): Icon = QiqIcons.FILE
 }

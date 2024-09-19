@@ -13,7 +13,7 @@
                 implementationClass="com.github.suzumaze.intellijqiqplugin.QiqFileType"
                 fieldName="INSTANCE"
                 language="Qiq"
-                extensions="qiq"/>
+                patterns="*.qiq.php"/>
         <lang.parserDefinition
                 language="Qiq"
                 implementationClass="com.github.suzumaze.intellijqiqplugin.QiqParserDefinition"/>
