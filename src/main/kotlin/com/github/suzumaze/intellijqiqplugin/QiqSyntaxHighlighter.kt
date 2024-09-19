@@ -9,7 +9,7 @@ import com.intellij.psi.tree.IElementType
 
 class QiqSyntaxHighlighter : SyntaxHighlighterBase() {
     companion object {
-        val QIQ_TAG: TextAttributesKey = TextAttributesKey.createTextAttributesKey("QIQ_TAG", DefaultLanguageHighlighterColors.BRACKETS)
+        val QIQ_TAG: TextAttributesKey = TextAttributesKey.createTextAttributesKey("QIQ_TAG", DefaultLanguageHighlighterColors.KEYWORD)
 
         private val QIQ_TAG_KEYS = arrayOf(QIQ_TAG)
         private val EMPTY_KEYS = arrayOf<TextAttributesKey>()

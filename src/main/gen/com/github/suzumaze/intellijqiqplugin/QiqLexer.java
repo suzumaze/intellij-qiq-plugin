@@ -7,7 +7,6 @@ import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.github.suzumaze.intellijqiqplugin.psi.QiqTypes;
 import com.intellij.psi.TokenType;
-import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 
 
 class QiqLexer implements FlexLexer {
@@ -534,17 +533,17 @@ class QiqLexer implements FlexLexer {
           // fall through
           case 9: break;
           case 4:
-            { yybegin(PHP_CONTENT); return PhpTokenTypes.PHP_OPENING_TAG;
+            { yybegin(PHP_CONTENT); return QiqTypes.QIQ_OPENING_TAG;
             }
           // fall through
           case 10: break;
           case 5:
-            { yybegin(YYINITIAL); return PhpTokenTypes.PHP_CLOSING_TAG;
+            { yybegin(YYINITIAL); return QiqTypes.QIQ_CLOSING_TAG;
             }
           // fall through
           case 11: break;
           case 6:
-            { yybegin(PHP_CONTENT); return PhpTokenTypes.PHP_ECHO_OPENING_TAG;
+            { yybegin(PHP_CONTENT); return QiqTypes.QIQ_ECHO_OPENING_TAG;
             }
           // fall through
           case 12: break;

@@ -4,7 +4,6 @@ import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.github.suzumaze.intellijqiqplugin.psi.QiqTypes;
 import com.intellij.psi.TokenType;
-import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 
 %%
 
@@ -28,12 +27,12 @@ QIQ_CLOSING_TAG="}}"
 %%
 
 <YYINITIAL> {
-  {QIQ_OPENING_TAG}            { yybegin(PHP_CONTENT); return PhpTokenTypes.PHP_OPENING_TAG; }
-  {QIQ_ECHO_OPENING_TAG}       { yybegin(PHP_CONTENT); return PhpTokenTypes.PHP_ECHO_OPENING_TAG; }
+  {QIQ_OPENING_TAG}            { yybegin(PHP_CONTENT); return QiqTypes.QIQ_OPENING_TAG; }
+  {QIQ_ECHO_OPENING_TAG}       { yybegin(PHP_CONTENT); return QiqTypes.QIQ_ECHO_OPENING_TAG; }
 }
 
 <PHP_CONTENT> {
-  {QIQ_CLOSING_TAG}            { yybegin(YYINITIAL); return PhpTokenTypes.PHP_CLOSING_TAG; }
+  {QIQ_CLOSING_TAG}            { yybegin(YYINITIAL); return QiqTypes.QIQ_CLOSING_TAG; }
   [^}]+                        { return QiqTypes.PHP_CONTENT; }
 }
 
