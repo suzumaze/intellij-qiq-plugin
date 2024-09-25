@@ -23,5 +23,8 @@
         <colorSettingsPage
                 implementation="com.github.suzumaze.intellijqiqplugin.QiqColorSettingsPage"/>
         <editorHighlighterProvider filetype="Qiq" implementationClass="com.github.suzumaze.intellijqiqplugin.QiqEditorHighlighterProvider"/>
+        <lang.formatter
+                language="Qiq"
+                implementationClass="com.github.suzumaze.intellijqiqplugin.QiqFormattingModelBuilder"/>
     </extensions>
 </idea-plugin>
