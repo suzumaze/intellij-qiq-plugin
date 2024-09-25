@@ -11,7 +11,7 @@ class QiqLayeredLexerEditorHighlighter(colors: EditorColorsScheme) :
     init {
         val htmlHighlighter = HtmlFileHighlighter()
 
-        registerLayer(QiqTypes.CONTENT, LayerDescriptor(htmlHighlighter, ""))
+        registerLayer(QiqTypes.TEMPLATE_TEXT, LayerDescriptor(htmlHighlighter, ""))
     }
 }
 

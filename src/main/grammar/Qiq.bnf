@@ -15,9 +15,41 @@
 
 qiqFile ::= item_*
 
-private item_ ::= (property|CRLF|PHP_BLOCK|CONTENT)
+private item_ ::= (qiqBlock | TEMPLATE_TEXT | CRLF)
+
+qiqBlock ::= normalBlock | echoBlock
+
+normalBlock ::= QIQ_OPENING_TAG qiqStatement* QIQ_CLOSING_TAG
+
+echoBlock ::= QIQ_ECHO_OPENING_TAG qiqExpression QIQ_CLOSING_TAG
+
+qiqStatement ::= ifStatement
+               | foreachStatement
+               | setBlockStatement
+               | getBlockStatement
+               | property
+               | qiqExpression
+
+ifStatement ::= IF '(' qiqExpression ')' ':' qiqStatement* (ELSE ':' qiqStatement*)? ENDIF
+
+foreachStatement ::= FOREACH '(' qiqExpression AS KEY '=>' VALUE ')' ':' qiqStatement* ENDFOREACH
+
+setBlockStatement ::= SETBLOCK '(' STRING_LITERAL ')' qiqStatement*
+
+getBlockStatement ::= GETBLOCK '(' ')'
+
+qiqExpression ::= property
+                | functionCall
+                | STRING_LITERAL
+                | NUMBER
+                | VARIABLE
 
 property ::= (KEY? SEPARATOR VALUE?) | KEY
 
-PHP_BLOCK ::= QIQ_OPENING_TAG PHP_CONTENT QIQ_CLOSING_TAG
-             | QIQ_ECHO_OPENING_TAG PHP_CONTENT QIQ_CLOSING_TAG
+functionCall ::= IDENTIFIER '(' (qiqExpression (',' qiqExpression)*)? ')'
+
+VARIABLE ::= '$' IDENTIFIER
+
+KEY ::= IDENTIFIER
+
+VALUE ::= (IDENTIFIER | STRING_LITERAL | NUMBER)

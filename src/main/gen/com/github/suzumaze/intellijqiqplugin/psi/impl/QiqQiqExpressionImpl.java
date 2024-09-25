@@ -11,14 +11,14 @@ import static com.github.suzumaze.intellijqiqplugin.psi.QiqTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.suzumaze.intellijqiqplugin.psi.*;
 
-public class QiqPropertyImpl extends ASTWrapperPsiElement implements QiqProperty {
+public class QiqQiqExpressionImpl extends ASTWrapperPsiElement implements QiqQiqExpression {
 
-  public QiqPropertyImpl(@NotNull ASTNode node) {
+  public QiqQiqExpressionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull QiqVisitor visitor) {
-    visitor.visitProperty(this);
+    visitor.visitQiqExpression(this);
   }
 
   @Override
@@ -29,14 +29,20 @@ public class QiqPropertyImpl extends ASTWrapperPsiElement implements QiqProperty
 
   @Override
   @Nullable
-  public QiqKey getKey() {
-    return findChildByClass(QiqKey.class);
+  public QiqVariable getVariable() {
+    return findChildByClass(QiqVariable.class);
   }
 
   @Override
   @Nullable
-  public QiqValue getValue() {
-    return findChildByClass(QiqValue.class);
+  public QiqFunctionCall getFunctionCall() {
+    return findChildByClass(QiqFunctionCall.class);
+  }
+
+  @Override
+  @Nullable
+  public QiqProperty getProperty() {
+    return findChildByClass(QiqProperty.class);
   }
 
 }

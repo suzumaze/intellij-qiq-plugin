@@ -5,12 +5,18 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface QiqProperty extends PsiElement {
+public interface QiqForeachStatement extends PsiElement {
 
-  @Nullable
+  @NotNull
   QiqKey getKey();
 
-  @Nullable
+  @NotNull
   QiqValue getValue();
+
+  @NotNull
+  QiqQiqExpression getQiqExpression();
+
+  @NotNull
+  List<QiqQiqStatement> getQiqStatementList();
 
 }

@@ -9,12 +9,6 @@ import javax.swing.Icon
 
 class QiqColorSettingsPage : ColorSettingsPage {
 
-    companion object {
-        private val DESCRIPTORS = arrayOf(
-            AttributesDescriptor("Qiq tag", QiqSyntaxHighlighter.QIQ_TAG),
-        )
-    }
-
     override fun getIcon(): Icon {
         return QiqIcons.FILE
     }
@@ -25,8 +19,22 @@ class QiqColorSettingsPage : ColorSettingsPage {
 
     override fun getDemoText(): String {
         return """
-            {{ php }}
-            <title>{{ $this }}</title>
+            {{= php }}
+            {{h ${'$'}foo }}
+            {{h "foo" }}
+            {{h 1 + 2 }}
+            {{h __FILE__ }}
+            {{h PHP_EOL }}
+            {{h ${'$'}person->firstName() }}
+            {{h time() }}
+            {{ foreach (${'$'}foo as ${'$'}bar => ${'$'}baz): }}
+                {{ if (${'$'}baz === 0): }}
+                    {{= "First element!" }}
+                {{ else: }}
+                    {{= "Not the first element." }}
+                {{ endif }}
+            {{ endforeach }}
+            <title>{{h ${'$'}this }}</title>
         """.trimIndent()
     }
 
@@ -46,3 +54,9 @@ class QiqColorSettingsPage : ColorSettingsPage {
         return "Qiq"
     }
 }
+
+private val DESCRIPTORS = arrayOf(
+    AttributesDescriptor("Delimiter", QiqSyntaxHighlighter.DELIMITER_TAG),
+    AttributesDescriptor("Statement", QiqSyntaxHighlighter.STATEMENT_TAG),
+    AttributesDescriptor("Variable", QiqSyntaxHighlighter.VARIABLE_TAG),
+)

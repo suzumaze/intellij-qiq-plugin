@@ -11,14 +11,14 @@ import static com.github.suzumaze.intellijqiqplugin.psi.QiqTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.suzumaze.intellijqiqplugin.psi.*;
 
-public class QiqPropertyImpl extends ASTWrapperPsiElement implements QiqProperty {
+public class QiqQiqBlockImpl extends ASTWrapperPsiElement implements QiqQiqBlock {
 
-  public QiqPropertyImpl(@NotNull ASTNode node) {
+  public QiqQiqBlockImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull QiqVisitor visitor) {
-    visitor.visitProperty(this);
+    visitor.visitQiqBlock(this);
   }
 
   @Override
@@ -29,14 +29,14 @@ public class QiqPropertyImpl extends ASTWrapperPsiElement implements QiqProperty
 
   @Override
   @Nullable
-  public QiqKey getKey() {
-    return findChildByClass(QiqKey.class);
+  public QiqEchoBlock getEchoBlock() {
+    return findChildByClass(QiqEchoBlock.class);
   }
 
   @Override
   @Nullable
-  public QiqValue getValue() {
-    return findChildByClass(QiqValue.class);
+  public QiqNormalBlock getNormalBlock() {
+    return findChildByClass(QiqNormalBlock.class);
   }
 
 }

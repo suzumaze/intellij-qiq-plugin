@@ -19,7 +19,7 @@ class QiqLexer implements FlexLexer {
 
   /** lexical states */
   public static final int YYINITIAL = 0;
-  public static final int PHP_CONTENT = 2;
+  public static final int IN_QIQ = 2;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -37,7 +37,7 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_CMAP_TOP = zzUnpackcmap_top();
 
   private static final String ZZ_CMAP_TOP_PACKED_0 =
-    "\1\0\37\u0100\1\u0200\u10df\u0100";
+    "\1\0\37\u0100\1\u0200\267\u0100\10\u0300\u1020\u0100";
 
   private static int [] zzUnpackcmap_top() {
     int [] result = new int[4352];
@@ -65,10 +65,17 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_CMAP_BLOCKS = zzUnpackcmap_blocks();
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
-    "\75\0\1\1\75\0\1\2\1\0\1\3\u0282\0";
+    "\11\0\1\1\1\2\1\3\1\4\1\5\22\0\1\1"+
+    "\1\0\1\6\1\0\1\7\11\0\1\10\1\0\12\11"+
+    "\1\12\2\0\1\13\3\0\1\14\1\15\30\14\1\0"+
+    "\1\16\2\0\1\14\1\0\1\17\1\14\1\20\1\21"+
+    "\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31"+
+    "\1\14\1\32\1\33\2\14\1\34\1\35\1\36\1\27"+
+    "\5\14\1\37\1\0\1\40\7\0\1\3\u01a2\0\2\3"+
+    "\326\0\u0100\41";
 
   private static int [] zzUnpackcmap_blocks() {
-    int [] result = new int[768];
+    int [] result = new int[1024];
     int offset = 0;
     offset = zzUnpackcmap_blocks(ZZ_CMAP_BLOCKS_PACKED_0, offset, result);
     return result;
@@ -92,10 +99,14 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\2\0\1\1\1\2\1\3\1\2\1\4\1\5\1\6";
+    "\2\0\1\1\2\2\1\3\2\4\2\2\1\5\1\6"+
+    "\7\7\1\2\1\10\1\0\1\11\1\0\1\12\1\5"+
+    "\1\13\4\7\1\14\1\7\1\15\1\16\1\10\5\7"+
+    "\1\17\6\7\1\20\10\7\1\21\3\7\1\22\1\23"+
+    "\1\7\1\24";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[9];
+    int [] result = new int[65];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -120,11 +131,18 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\4\0\10\0\14\0\20\0\24\0\30\0\34"+
-    "\0\34";
+    "\0\0\0\42\0\104\0\146\0\210\0\252\0\210\0\314"+
+    "\0\356\0\u0110\0\u0132\0\210\0\u0154\0\u0176\0\u0198\0\u01ba"+
+    "\0\u01dc\0\u01fe\0\u0220\0\u0242\0\u0264\0\356\0\210\0\u0286"+
+    "\0\u02a8\0\u02ca\0\u0154\0\u02ec\0\u030e\0\u0330\0\u0352\0\u0154"+
+    "\0\u0374\0\210\0\210\0\210\0\u0396\0\u03b8\0\u03da\0\u03fc"+
+    "\0\u041e\0\u0154\0\u0440\0\u0462\0\u0484\0\u04a6\0\u04c8\0\u04ea"+
+    "\0\u0154\0\u050c\0\u052e\0\u0550\0\u0572\0\u0594\0\u05b6\0\u05d8"+
+    "\0\u05fa\0\u0154\0\u061c\0\u063e\0\u0660\0\u0154\0\u0154\0\u0682"+
+    "\0\u0154";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[9];
+    int [] result = new int[65];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -147,12 +165,53 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\2\3\1\4\1\3\3\5\1\6\2\3\1\0\1\3"+
-    "\2\0\1\7\1\0\3\5\4\0\1\10\1\0\1\11"+
-    "\6\0";
+    "\37\3\1\4\2\3\1\5\2\6\1\7\1\6\1\10"+
+    "\1\11\1\12\1\5\1\13\2\14\2\15\1\5\1\16"+
+    "\2\15\1\17\1\20\1\21\1\15\1\22\6\15\1\23"+
+    "\1\15\1\5\1\24\1\5\37\3\1\0\2\3\37\0"+
+    "\1\25\45\0\2\6\1\0\1\6\37\0\1\7\37\0"+
+    "\6\26\1\27\7\26\1\30\23\26\14\0\2\31\1\0"+
+    "\20\31\13\0\1\32\1\13\41\0\1\15\2\0\2\15"+
+    "\1\0\20\15\14\0\1\15\2\0\2\15\1\0\16\15"+
+    "\1\33\1\15\14\0\1\15\2\0\2\15\1\0\12\15"+
+    "\1\34\1\35\4\15\14\0\1\15\2\0\2\15\1\0"+
+    "\14\15\1\36\3\15\14\0\1\15\2\0\2\15\1\0"+
+    "\3\15\1\37\14\15\14\0\1\15\2\0\2\15\1\0"+
+    "\4\15\1\40\13\15\14\0\1\15\2\0\2\15\1\0"+
+    "\3\15\1\41\14\15\43\0\1\42\14\0\1\43\3\0"+
+    "\2\44\4\0\1\44\1\0\1\44\12\0\2\26\4\0"+
+    "\33\26\12\0\1\31\2\0\2\31\1\0\20\31\14\0"+
+    "\1\32\41\0\1\15\2\0\2\15\1\0\16\15\1\45"+
+    "\1\15\14\0\1\15\2\0\2\15\1\0\2\15\1\46"+
+    "\15\15\14\0\1\15\2\0\2\15\1\0\15\15\1\47"+
+    "\2\15\14\0\1\15\2\0\2\15\1\0\17\15\1\50"+
+    "\14\0\1\15\2\0\2\15\1\0\17\15\1\51\14\0"+
+    "\1\15\2\0\2\15\1\0\3\15\1\52\14\15\14\0"+
+    "\1\15\2\0\2\15\1\0\4\15\1\53\2\15\1\54"+
+    "\10\15\14\0\1\15\2\0\2\15\1\0\3\15\1\55"+
+    "\14\15\14\0\1\15\2\0\1\15\1\56\1\0\20\15"+
+    "\14\0\1\15\2\0\1\15\1\57\1\0\20\15\14\0"+
+    "\1\15\2\0\2\15\1\0\14\15\1\60\3\15\14\0"+
+    "\1\15\2\0\2\15\1\0\4\15\1\61\13\15\14\0"+
+    "\1\15\2\0\2\15\1\0\1\62\17\15\14\0\1\15"+
+    "\2\0\2\15\1\0\12\15\1\63\5\15\14\0\1\15"+
+    "\2\0\2\15\1\0\12\15\1\64\5\15\14\0\1\15"+
+    "\2\0\2\15\1\0\15\15\1\65\2\15\14\0\1\15"+
+    "\2\0\2\15\1\0\1\15\1\66\16\15\14\0\1\15"+
+    "\2\0\2\15\1\0\14\15\1\67\3\15\14\0\1\15"+
+    "\2\0\2\15\1\0\14\15\1\70\3\15\14\0\1\15"+
+    "\2\0\2\15\1\0\3\15\1\71\14\15\14\0\1\15"+
+    "\2\0\2\15\1\0\6\15\1\72\11\15\14\0\1\15"+
+    "\2\0\2\15\1\0\1\15\1\73\16\15\14\0\1\15"+
+    "\2\0\2\15\1\0\1\15\1\74\16\15\14\0\1\15"+
+    "\2\0\2\15\1\0\1\75\17\15\14\0\1\15\2\0"+
+    "\2\15\1\0\11\15\1\76\6\15\14\0\1\15\2\0"+
+    "\2\15\1\0\11\15\1\77\6\15\14\0\1\15\2\0"+
+    "\2\15\1\0\1\15\1\100\16\15\14\0\1\15\2\0"+
+    "\2\15\1\0\6\15\1\101\11\15\3\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[32];
+    int [] result = new int[1700];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -190,10 +249,11 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\2\0\5\1\2\11";
+    "\2\0\2\1\1\11\1\1\1\11\4\1\1\11\11\1"+
+    "\1\0\1\11\1\0\11\1\3\11\35\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[9];
+    int [] result = new int[65];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -515,35 +575,105 @@ class QiqLexer implements FlexLexer {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { return QiqTypes.CONTENT;
+            { return QiqTypes.TEMPLATE_TEXT;
             }
           // fall through
-          case 7: break;
+          case 21: break;
           case 2:
             { return TokenType.BAD_CHARACTER;
             }
           // fall through
-          case 8: break;
+          case 22: break;
           case 3:
-            { return QiqTypes.PHP_CONTENT;
+            { return TokenType.WHITE_SPACE;
             }
           // fall through
-          case 9: break;
+          case 23: break;
           case 4:
-            { yybegin(PHP_CONTENT); return QiqTypes.QIQ_OPENING_TAG;
+            { return QiqTypes.CRLF;
             }
           // fall through
-          case 10: break;
+          case 24: break;
           case 5:
+            { return QiqTypes.NUMBER;
+            }
+          // fall through
+          case 25: break;
+          case 6:
+            { return QiqTypes.SEPARATOR;
+            }
+          // fall through
+          case 26: break;
+          case 7:
+            { return QiqTypes.IDENTIFIER;
+            }
+          // fall through
+          case 27: break;
+          case 8:
+            { yybegin(IN_QIQ); return QiqTypes.QIQ_OPENING_TAG;
+            }
+          // fall through
+          case 28: break;
+          case 9:
+            { return QiqTypes.STRING_LITERAL;
+            }
+          // fall through
+          case 29: break;
+          case 10:
+            { return QiqTypes.VARIABLE;
+            }
+          // fall through
+          case 30: break;
+          case 11:
+            { return QiqTypes.AS;
+            }
+          // fall through
+          case 31: break;
+          case 12:
+            { return QiqTypes.IF;
+            }
+          // fall through
+          case 32: break;
+          case 13:
             { yybegin(YYINITIAL); return QiqTypes.QIQ_CLOSING_TAG;
             }
           // fall through
-          case 11: break;
-          case 6:
-            { yybegin(PHP_CONTENT); return QiqTypes.QIQ_ECHO_OPENING_TAG;
+          case 33: break;
+          case 14:
+            { yybegin(IN_QIQ); return QiqTypes.QIQ_ECHO_OPENING_TAG;
             }
           // fall through
-          case 12: break;
+          case 34: break;
+          case 15:
+            { return QiqTypes.ELSE;
+            }
+          // fall through
+          case 35: break;
+          case 16:
+            { return QiqTypes.ENDIF;
+            }
+          // fall through
+          case 36: break;
+          case 17:
+            { return QiqTypes.FOREACH;
+            }
+          // fall through
+          case 37: break;
+          case 18:
+            { return QiqTypes.GETBLOCK;
+            }
+          // fall through
+          case 38: break;
+          case 19:
+            { return QiqTypes.SETBLOCK;
+            }
+          // fall through
+          case 39: break;
+          case 20:
+            { return QiqTypes.ENDFOREACH;
+            }
+          // fall through
+          case 40: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }
