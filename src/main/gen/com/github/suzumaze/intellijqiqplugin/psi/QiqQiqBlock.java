@@ -7,10 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface QiqQiqBlock extends PsiElement {
 
-  @Nullable
-  QiqEchoBlock getEchoBlock();
-
-  @Nullable
-  QiqNormalBlock getNormalBlock();
+  @NotNull
+  List<QiqStatement> getStatementList();
 
 }

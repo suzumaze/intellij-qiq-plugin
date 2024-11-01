@@ -11,20 +11,26 @@ import static com.github.suzumaze.intellijqiqplugin.psi.QiqTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.suzumaze.intellijqiqplugin.psi.*;
 
-public class QiqKeyImpl extends ASTWrapperPsiElement implements QiqKey {
+public class QiqArrayImpl extends ASTWrapperPsiElement implements QiqArray {
 
-  public QiqKeyImpl(@NotNull ASTNode node) {
+  public QiqArrayImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull QiqVisitor visitor) {
-    visitor.visitKey(this);
+    visitor.visitArray(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof QiqVisitor) accept((QiqVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public List<QiqExpression> getExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqExpression.class);
   }
 
 }

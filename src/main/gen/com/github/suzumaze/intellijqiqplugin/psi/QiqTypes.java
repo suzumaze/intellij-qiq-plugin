@@ -8,83 +8,78 @@ import com.github.suzumaze.intellijqiqplugin.psi.impl.*;
 
 public interface QiqTypes {
 
-  IElementType ECHO_BLOCK = new QiqElementType("ECHO_BLOCK");
-  IElementType FOREACH_STATEMENT = new QiqElementType("FOREACH_STATEMENT");
+  IElementType ARRAY = new QiqElementType("ARRAY");
+  IElementType EXPRESSION = new QiqElementType("EXPRESSION");
   IElementType FUNCTION_CALL = new QiqElementType("FUNCTION_CALL");
-  IElementType GET_BLOCK_STATEMENT = new QiqElementType("GET_BLOCK_STATEMENT");
-  IElementType IF_STATEMENT = new QiqElementType("IF_STATEMENT");
-  IElementType KEY = new QiqElementType("KEY");
-  IElementType NORMAL_BLOCK = new QiqElementType("NORMAL_BLOCK");
-  IElementType PROPERTY = new QiqElementType("PROPERTY");
+  IElementType NAMED_ARGUMENT = new QiqElementType("NAMED_ARGUMENT");
   IElementType QIQ_BLOCK = new QiqElementType("QIQ_BLOCK");
-  IElementType QIQ_EXPRESSION = new QiqElementType("QIQ_EXPRESSION");
-  IElementType QIQ_STATEMENT = new QiqElementType("QIQ_STATEMENT");
-  IElementType SET_BLOCK_STATEMENT = new QiqElementType("SET_BLOCK_STATEMENT");
-  IElementType VALUE = new QiqElementType("VALUE");
-  IElementType VARIABLE = new QiqElementType("VARIABLE");
+  IElementType STATEMENT = new QiqElementType("STATEMENT");
 
+  IElementType AND_OP = new QiqTokenType("AND_OP");
+  IElementType ARROW = new QiqTokenType("ARROW");
   IElementType AS = new QiqTokenType("AS");
+  IElementType BLOCK_COMMENT = new QiqTokenType("BLOCK_COMMENT");
+  IElementType COLON = new QiqTokenType("COLON");
+  IElementType COMMA = new QiqTokenType("COMMA");
   IElementType CRLF = new QiqTokenType("CRLF");
-  IElementType ELSE = new QiqTokenType("ELSE");
-  IElementType ENDFOREACH = new QiqTokenType("ENDFOREACH");
-  IElementType ENDIF = new QiqTokenType("ENDIF");
-  IElementType FOREACH = new QiqTokenType("FOREACH");
-  IElementType GETBLOCK = new QiqTokenType("GETBLOCK");
+  IElementType DIVIDE = new QiqTokenType("DIVIDE");
+  IElementType DOC_COMMENT = new QiqTokenType("DOC_COMMENT");
+  IElementType DOT = new QiqTokenType("DOT");
+  IElementType DOUBLE_QUOTED_STRING = new QiqTokenType("DOUBLE_QUOTED_STRING");
+  IElementType EQUALS = new QiqTokenType("EQUALS");
+  IElementType EQUAL_TO = new QiqTokenType("EQUAL_TO");
+  IElementType GREATER_EQUAL = new QiqTokenType("GREATER_EQUAL");
+  IElementType GREATER_THAN = new QiqTokenType("GREATER_THAN");
+  IElementType IDENTICAL = new QiqTokenType("IDENTICAL");
   IElementType IDENTIFIER = new QiqTokenType("IDENTIFIER");
-  IElementType IF = new QiqTokenType("IF");
+  IElementType LEFT_BRACKET = new QiqTokenType("LEFT_BRACKET");
+  IElementType LEFT_PAREN = new QiqTokenType("LEFT_PAREN");
+  IElementType LESS_EQUAL = new QiqTokenType("LESS_EQUAL");
+  IElementType LESS_THAN = new QiqTokenType("LESS_THAN");
+  IElementType LINE_COMMENT = new QiqTokenType("LINE_COMMENT");
+  IElementType MINUS = new QiqTokenType("MINUS");
+  IElementType MOD = new QiqTokenType("MOD");
+  IElementType MULTIPLY = new QiqTokenType("MULTIPLY");
+  IElementType NOT_EQUAL = new QiqTokenType("NOT_EQUAL");
+  IElementType NOT_IDENTICAL = new QiqTokenType("NOT_IDENTICAL");
+  IElementType NOT_OP = new QiqTokenType("NOT_OP");
   IElementType NUMBER = new QiqTokenType("NUMBER");
+  IElementType OBJECT_OPERATOR = new QiqTokenType("OBJECT_OPERATOR");
+  IElementType OR_OP = new QiqTokenType("OR_OP");
+  IElementType PHP_CLOSING_TAG = new QiqTokenType("PHP_CLOSING_TAG");
+  IElementType PHP_CODE = new QiqTokenType("PHP_CODE");
+  IElementType PHP_ECHO_OPENING_TAG = new QiqTokenType("PHP_ECHO_OPENING_TAG");
+  IElementType PHP_OPENING_TAG = new QiqTokenType("PHP_OPENING_TAG");
+  IElementType PLUS = new QiqTokenType("PLUS");
   IElementType QIQ_CLOSING_TAG = new QiqTokenType("QIQ_CLOSING_TAG");
   IElementType QIQ_ECHO_OPENING_TAG = new QiqTokenType("QIQ_ECHO_OPENING_TAG");
   IElementType QIQ_OPENING_TAG = new QiqTokenType("QIQ_OPENING_TAG");
-  IElementType SEPARATOR = new QiqTokenType("SEPARATOR");
-  IElementType SETBLOCK = new QiqTokenType("SETBLOCK");
-  IElementType STRING_LITERAL = new QiqTokenType("STRING_LITERAL");
+  IElementType RIGHT_BRACKET = new QiqTokenType("RIGHT_BRACKET");
+  IElementType RIGHT_PAREN = new QiqTokenType("RIGHT_PAREN");
+  IElementType SINGLE_QUOTED_STRING = new QiqTokenType("SINGLE_QUOTED_STRING");
   IElementType TEMPLATE_TEXT = new QiqTokenType("TEMPLATE_TEXT");
+  IElementType VARIABLE = new QiqTokenType("VARIABLE");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == ECHO_BLOCK) {
-        return new QiqEchoBlockImpl(node);
+      if (type == ARRAY) {
+        return new QiqArrayImpl(node);
       }
-      else if (type == FOREACH_STATEMENT) {
-        return new QiqForeachStatementImpl(node);
+      else if (type == EXPRESSION) {
+        return new QiqExpressionImpl(node);
       }
       else if (type == FUNCTION_CALL) {
         return new QiqFunctionCallImpl(node);
       }
-      else if (type == GET_BLOCK_STATEMENT) {
-        return new QiqGetBlockStatementImpl(node);
-      }
-      else if (type == IF_STATEMENT) {
-        return new QiqIfStatementImpl(node);
-      }
-      else if (type == KEY) {
-        return new QiqKeyImpl(node);
-      }
-      else if (type == NORMAL_BLOCK) {
-        return new QiqNormalBlockImpl(node);
-      }
-      else if (type == PROPERTY) {
-        return new QiqPropertyImpl(node);
+      else if (type == NAMED_ARGUMENT) {
+        return new QiqNamedArgumentImpl(node);
       }
       else if (type == QIQ_BLOCK) {
         return new QiqQiqBlockImpl(node);
       }
-      else if (type == QIQ_EXPRESSION) {
-        return new QiqQiqExpressionImpl(node);
-      }
-      else if (type == QIQ_STATEMENT) {
-        return new QiqQiqStatementImpl(node);
-      }
-      else if (type == SET_BLOCK_STATEMENT) {
-        return new QiqSetBlockStatementImpl(node);
-      }
-      else if (type == VALUE) {
-        return new QiqValueImpl(node);
-      }
-      else if (type == VARIABLE) {
-        return new QiqVariableImpl(node);
+      else if (type == STATEMENT) {
+        return new QiqStatementImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

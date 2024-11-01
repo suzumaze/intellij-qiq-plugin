@@ -11,20 +11,32 @@ import static com.github.suzumaze.intellijqiqplugin.psi.QiqTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.suzumaze.intellijqiqplugin.psi.*;
 
-public class QiqGetBlockStatementImpl extends ASTWrapperPsiElement implements QiqGetBlockStatement {
+public class QiqStatementImpl extends ASTWrapperPsiElement implements QiqStatement {
 
-  public QiqGetBlockStatementImpl(@NotNull ASTNode node) {
+  public QiqStatementImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull QiqVisitor visitor) {
-    visitor.visitGetBlockStatement(this);
+    visitor.visitStatement(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof QiqVisitor) accept((QiqVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public QiqExpression getExpression() {
+    return findChildByClass(QiqExpression.class);
+  }
+
+  @Override
+  @Nullable
+  public QiqFunctionCall getFunctionCall() {
+    return findChildByClass(QiqFunctionCall.class);
   }
 
 }

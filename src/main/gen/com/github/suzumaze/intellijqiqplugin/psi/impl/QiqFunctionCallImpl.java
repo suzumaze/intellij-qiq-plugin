@@ -29,8 +29,14 @@ public class QiqFunctionCallImpl extends ASTWrapperPsiElement implements QiqFunc
 
   @Override
   @NotNull
-  public List<QiqQiqExpression> getQiqExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqQiqExpression.class);
+  public List<QiqExpression> getExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqExpression.class);
+  }
+
+  @Override
+  @NotNull
+  public List<QiqNamedArgument> getNamedArgumentList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqNamedArgument.class);
   }
 
 }

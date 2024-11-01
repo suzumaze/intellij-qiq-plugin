@@ -28,15 +28,9 @@ public class QiqQiqBlockImpl extends ASTWrapperPsiElement implements QiqQiqBlock
   }
 
   @Override
-  @Nullable
-  public QiqEchoBlock getEchoBlock() {
-    return findChildByClass(QiqEchoBlock.class);
-  }
-
-  @Override
-  @Nullable
-  public QiqNormalBlock getNormalBlock() {
-    return findChildByClass(QiqNormalBlock.class);
+  @NotNull
+  public List<QiqStatement> getStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqStatement.class);
   }
 
 }

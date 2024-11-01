@@ -11,14 +11,14 @@ import static com.github.suzumaze.intellijqiqplugin.psi.QiqTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.suzumaze.intellijqiqplugin.psi.*;
 
-public class QiqIfStatementImpl extends ASTWrapperPsiElement implements QiqIfStatement {
+public class QiqExpressionImpl extends ASTWrapperPsiElement implements QiqExpression {
 
-  public QiqIfStatementImpl(@NotNull ASTNode node) {
+  public QiqExpressionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull QiqVisitor visitor) {
-    visitor.visitIfStatement(this);
+    visitor.visitExpression(this);
   }
 
   @Override
@@ -29,14 +29,14 @@ public class QiqIfStatementImpl extends ASTWrapperPsiElement implements QiqIfSta
 
   @Override
   @NotNull
-  public QiqQiqExpression getQiqExpression() {
-    return findNotNullChildByClass(QiqQiqExpression.class);
+  public List<QiqArray> getArrayList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqArray.class);
   }
 
   @Override
   @NotNull
-  public List<QiqQiqStatement> getQiqStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqQiqStatement.class);
+  public List<QiqExpression> getExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqExpression.class);
   }
 
 }

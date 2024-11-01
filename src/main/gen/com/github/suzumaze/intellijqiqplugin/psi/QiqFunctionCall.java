@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface QiqFunctionCall extends PsiElement {
 
   @NotNull
-  List<QiqQiqExpression> getQiqExpressionList();
+  List<QiqExpression> getExpressionList();
+
+  @NotNull
+  List<QiqNamedArgument> getNamedArgumentList();
 
 }

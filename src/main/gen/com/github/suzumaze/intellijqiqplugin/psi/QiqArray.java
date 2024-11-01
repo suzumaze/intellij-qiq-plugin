@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface QiqEchoBlock extends PsiElement {
+public interface QiqArray extends PsiElement {
 
   @NotNull
-  QiqQiqExpression getQiqExpression();
+  List<QiqExpression> getExpressionList();
 
 }

@@ -57,6 +57,4 @@ class QiqColorSettingsPage : ColorSettingsPage {
 
 private val DESCRIPTORS = arrayOf(
     AttributesDescriptor("Delimiter", QiqSyntaxHighlighter.DELIMITER_TAG),
-    AttributesDescriptor("Statement", QiqSyntaxHighlighter.STATEMENT_TAG),
-    AttributesDescriptor("Variable", QiqSyntaxHighlighter.VARIABLE_TAG),
 )

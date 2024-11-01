@@ -7,23 +7,11 @@ import com.intellij.psi.PsiElement;
 
 public class QiqVisitor extends PsiElementVisitor {
 
-  public void visitKey(@NotNull QiqKey o) {
+  public void visitArray(@NotNull QiqArray o) {
     visitPsiElement(o);
   }
 
-  public void visitValue(@NotNull QiqValue o) {
-    visitPsiElement(o);
-  }
-
-  public void visitVariable(@NotNull QiqVariable o) {
-    visitPsiElement(o);
-  }
-
-  public void visitEchoBlock(@NotNull QiqEchoBlock o) {
-    visitPsiElement(o);
-  }
-
-  public void visitForeachStatement(@NotNull QiqForeachStatement o) {
+  public void visitExpression(@NotNull QiqExpression o) {
     visitPsiElement(o);
   }
 
@@ -31,19 +19,7 @@ public class QiqVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitGetBlockStatement(@NotNull QiqGetBlockStatement o) {
-    visitPsiElement(o);
-  }
-
-  public void visitIfStatement(@NotNull QiqIfStatement o) {
-    visitPsiElement(o);
-  }
-
-  public void visitNormalBlock(@NotNull QiqNormalBlock o) {
-    visitPsiElement(o);
-  }
-
-  public void visitProperty(@NotNull QiqProperty o) {
+  public void visitNamedArgument(@NotNull QiqNamedArgument o) {
     visitPsiElement(o);
   }
 
@@ -51,15 +27,7 @@ public class QiqVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitQiqExpression(@NotNull QiqQiqExpression o) {
-    visitPsiElement(o);
-  }
-
-  public void visitQiqStatement(@NotNull QiqQiqStatement o) {
-    visitPsiElement(o);
-  }
-
-  public void visitSetBlockStatement(@NotNull QiqSetBlockStatement o) {
+  public void visitStatement(@NotNull QiqStatement o) {
     visitPsiElement(o);
   }
 
