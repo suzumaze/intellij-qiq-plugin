@@ -24,32 +24,54 @@ internal class QiqFormattingModelBuilder : FormattingModelBuilder {
 
 private fun createSpaceBuilder(settings: CodeStyleSettings): SpacingBuilder {
     return SpacingBuilder(settings, QiqLanguage.INSTANCE)
-        // 演算子の周りにスペース
-        .around(QiqTypes.PLUS).spaceIf(true)
-        .around(QiqTypes.MINUS).spaceIf(true)
-        .around(QiqTypes.MULTIPLY).spaceIf(true)
-        .around(QiqTypes.DIVIDE).spaceIf(true)
-        .around(QiqTypes.MOD).spaceIf(true)
-        .around(QiqTypes.EQUAL_TO).spaceIf(true)
-        .around(QiqTypes.NOT_EQUAL).spaceIf(true)
-        .around(QiqTypes.IDENTICAL).spaceIf(true)
-        .around(QiqTypes.NOT_IDENTICAL).spaceIf(true)
-        .around(QiqTypes.AND_OP).spaceIf(true)
-        .around(QiqTypes.OR_OP).spaceIf(true)
-        .around(QiqTypes.AS).spaceIf(true)
+        // Qiqタグのスペース
+        .after(QiqTypes.QIQ_OPENING_TAG).spaceIf(true)
+        .after(QiqTypes.QIQ_ECHO_OPENING_TAG).spaceIf(true)
 
-        // カンマの後にスペース
-        .after(QiqTypes.COMMA).spaceIf(true)
+        // 1行コメント以外で、Qiq閉じタグの前にスペースを入れる（先に定義した設定が適応される）
+        .between(QiqTypes.LINE_COMMENT, QiqTypes.QIQ_CLOSING_TAG).none()
+        .before(QiqTypes.QIQ_CLOSING_TAG).spaceIf(true)
 
-        // 括弧の中のスペース制御
-        .after(QiqTypes.LEFT_PAREN).none()
+        // ( の前にスペースを入れる
+        .before(QiqTypes.LEFT_PAREN).spaceIf(true)
+
+        // ( の前にスペースを入れる
         .before(QiqTypes.RIGHT_PAREN).none()
-        .after(QiqTypes.LEFT_BRACKET).none()
-        .before(QiqTypes.RIGHT_BRACKET).none()
 
-        // アロー演算子の周りにスペース
-        .around(QiqTypes.ARROW).spaceIf(true)
+        // 代入演算子
+        .around(QiqTypes.EQUALS).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_ASSIGNMENT_OPERATORS)
 
-        // オブジェクト演算子の周りにスペースなし
+        // 論理演算子
+        .around(QiqTypes.AND_OP).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_LOGICAL_OPERATORS)
+        .around(QiqTypes.OR_OP).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_LOGICAL_OPERATORS)
+        .around(QiqTypes.NOT_OP).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_LOGICAL_OPERATORS)
+
+        // 等価演算子
+        .around(QiqTypes.EQUAL_TO).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_EQUALITY_OPERATORS)
+        .around(QiqTypes.NOT_EQUAL).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_EQUALITY_OPERATORS)
+        .around(QiqTypes.IDENTICAL).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_EQUALITY_OPERATORS)
+        .around(QiqTypes.NOT_IDENTICAL).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_EQUALITY_OPERATORS)
+
+        // 関係演算子
+        .around(QiqTypes.GREATER_THAN).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_RELATIONAL_OPERATORS)
+        .around(QiqTypes.LESS_THAN).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_RELATIONAL_OPERATORS)
+        .around(QiqTypes.GREATER_EQUAL).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_RELATIONAL_OPERATORS)
+        .around(QiqTypes.LESS_EQUAL).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_RELATIONAL_OPERATORS)
+
+        // 算術演算子
+        .around(QiqTypes.PLUS).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_ADDITIVE_OPERATORS)
+        .around(QiqTypes.MINUS).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_ADDITIVE_OPERATORS)
+        .around(QiqTypes.MULTIPLY).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_MULTIPLICATIVE_OPERATORS)
+        .around(QiqTypes.DIVIDE).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_MULTIPLICATIVE_OPERATORS)
+        .around(QiqTypes.MOD).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_MULTIPLICATIVE_OPERATORS)
+
+        // コンマ
+        .after(QiqTypes.COMMA).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AFTER_COMMA)
+        .before(QiqTypes.COMMA).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_BEFORE_COMMA)
+
+        // アロー演算子（=>）
+        .around(QiqTypes.ARROW).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_LAMBDA_ARROW)
+
+        // オブジェクト演算子（->）
         .around(QiqTypes.OBJECT_OPERATOR).none()
 }
