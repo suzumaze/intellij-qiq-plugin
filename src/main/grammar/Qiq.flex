@@ -29,7 +29,7 @@ DOC_COMMENT      = "/**" ([^*] | \*[^/])* \*"/"
 
 QIQ_OPENING_TAG      = "{{" [hucja]?
 QIQ_ECHO_OPENING_TAG = "{{="
-QIQ_CLOSING_TAG      = "}}"
+QIQ_CLOSING_TAG      = "}}"|"~}}"
 
 PHP_OPENING_TAG      = "<?php"
 PHP_ECHO_OPENING_TAG = "<?="
