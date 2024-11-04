@@ -208,7 +208,7 @@ public class QiqParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (statement | comment)*
+  // (statement | comment | useStatement)*
   static boolean blockContent(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "blockContent")) return false;
     while (true) {
@@ -219,12 +219,13 @@ public class QiqParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // statement | comment
+  // statement | comment | useStatement
   private static boolean blockContent_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "blockContent_0")) return false;
     boolean r;
     r = statement(b, l + 1);
     if (!r) r = comment(b, l + 1);
+    if (!r) r = useStatement(b, l + 1);
     return r;
   }
 
@@ -638,6 +639,40 @@ public class QiqParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // IDENTIFIER (BACKSLASH IDENTIFIER)*
+  public static boolean qualifiedName(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "qualifiedName")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    r = r && qualifiedName_1(b, l + 1);
+    exit_section_(b, m, QUALIFIED_NAME, r);
+    return r;
+  }
+
+  // (BACKSLASH IDENTIFIER)*
+  private static boolean qualifiedName_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "qualifiedName_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!qualifiedName_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "qualifiedName_1", c)) break;
+    }
+    return true;
+  }
+
+  // BACKSLASH IDENTIFIER
+  private static boolean qualifiedName_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "qualifiedName_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, BACKSLASH, IDENTIFIER);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // VARIABLE             // 例: $name
   //    | SINGLE_QUOTED_STRING  // 例: 'text'
   //    | DOUBLE_QUOTED_STRING  // 例: "text"
@@ -738,6 +773,45 @@ public class QiqParser implements PsiParser, LightPsiParser {
   private static boolean statement_1_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_1_1")) return false;
     consumeToken(b, COLON);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // USE qualifiedName (AS IDENTIFIER)? SEMICOLON?
+  public static boolean useStatement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "useStatement")) return false;
+    if (!nextTokenIs(b, USE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, USE);
+    r = r && qualifiedName(b, l + 1);
+    r = r && useStatement_2(b, l + 1);
+    r = r && useStatement_3(b, l + 1);
+    exit_section_(b, m, USE_STATEMENT, r);
+    return r;
+  }
+
+  // (AS IDENTIFIER)?
+  private static boolean useStatement_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "useStatement_2")) return false;
+    useStatement_2_0(b, l + 1);
+    return true;
+  }
+
+  // AS IDENTIFIER
+  private static boolean useStatement_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "useStatement_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, AS, IDENTIFIER);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // SEMICOLON?
+  private static boolean useStatement_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "useStatement_3")) return false;
+    consumeToken(b, SEMICOLON);
     return true;
   }
 

@@ -13,11 +13,14 @@ public interface QiqTypes {
   IElementType FUNCTION_CALL = new QiqElementType("FUNCTION_CALL");
   IElementType NAMED_ARGUMENT = new QiqElementType("NAMED_ARGUMENT");
   IElementType QIQ_BLOCK = new QiqElementType("QIQ_BLOCK");
+  IElementType QUALIFIED_NAME = new QiqElementType("QUALIFIED_NAME");
   IElementType STATEMENT = new QiqElementType("STATEMENT");
+  IElementType USE_STATEMENT = new QiqElementType("USE_STATEMENT");
 
   IElementType AND_OP = new QiqTokenType("AND_OP");
   IElementType ARROW = new QiqTokenType("ARROW");
   IElementType AS = new QiqTokenType("AS");
+  IElementType BACKSLASH = new QiqTokenType("BACKSLASH");
   IElementType BLOCK_COMMENT = new QiqTokenType("BLOCK_COMMENT");
   IElementType COLON = new QiqTokenType("COLON");
   IElementType COMMA = new QiqTokenType("COMMA");
@@ -56,8 +59,10 @@ public interface QiqTypes {
   IElementType QIQ_OPENING_TAG = new QiqTokenType("QIQ_OPENING_TAG");
   IElementType RIGHT_BRACKET = new QiqTokenType("RIGHT_BRACKET");
   IElementType RIGHT_PAREN = new QiqTokenType("RIGHT_PAREN");
+  IElementType SEMICOLON = new QiqTokenType("SEMICOLON");
   IElementType SINGLE_QUOTED_STRING = new QiqTokenType("SINGLE_QUOTED_STRING");
   IElementType TEMPLATE_TEXT = new QiqTokenType("TEMPLATE_TEXT");
+  IElementType USE = new QiqTokenType("USE");
   IElementType VARIABLE = new QiqTokenType("VARIABLE");
 
   class Factory {
@@ -78,8 +83,14 @@ public interface QiqTypes {
       else if (type == QIQ_BLOCK) {
         return new QiqQiqBlockImpl(node);
       }
+      else if (type == QUALIFIED_NAME) {
+        return new QiqQualifiedNameImpl(node);
+      }
       else if (type == STATEMENT) {
         return new QiqStatementImpl(node);
+      }
+      else if (type == USE_STATEMENT) {
+        return new QiqUseStatementImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

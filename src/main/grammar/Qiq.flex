@@ -36,6 +36,7 @@ PHP_ECHO_OPENING_TAG = "<?="
 PHP_CLOSING_TAG      = "?>"
 
 AS      = "as"
+USE     = "use"
 
 %state IN_QIQ
 %state IN_PHP
@@ -61,6 +62,7 @@ AS      = "as"
     {QIQ_CLOSING_TAG}       { yybegin(YYINITIAL); return QiqTypes.QIQ_CLOSING_TAG; }
 
     {AS}                   { return QiqTypes.AS; }
+    {USE}                   { return QiqTypes.USE; }
 
     "==="                  { return QiqTypes.IDENTICAL; }
     "!=="                  { return QiqTypes.NOT_IDENTICAL; }
@@ -77,6 +79,7 @@ AS      = "as"
     "-"                    { return QiqTypes.MINUS; }
     "*"                    { return QiqTypes.MULTIPLY; }
     "/"                    { return QiqTypes.DIVIDE; }
+    "\\"                   { return QiqTypes.BACKSLASH; }
     "%"                    { return QiqTypes.MOD; }
     "."                    { return QiqTypes.DOT; }
     ">"                    { return QiqTypes.GREATER_THAN; }
@@ -85,6 +88,7 @@ AS      = "as"
     "!"                    { return QiqTypes.NOT_OP; }
 
     ":"                    { return QiqTypes.COLON; }
+    ";"                    { return QiqTypes.SEMICOLON; }
     ","                    { return QiqTypes.COMMA; }
     "("                    { return QiqTypes.LEFT_PAREN; }
     ")"                    { return QiqTypes.RIGHT_PAREN; }

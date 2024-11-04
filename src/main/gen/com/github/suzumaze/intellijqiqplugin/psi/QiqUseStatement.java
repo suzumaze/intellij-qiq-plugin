@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface QiqQiqBlock extends PsiElement {
+public interface QiqUseStatement extends PsiElement {
 
   @NotNull
-  List<QiqStatement> getStatementList();
-
-  @NotNull
-  List<QiqUseStatement> getUseStatementList();
+  QiqQualifiedName getQualifiedName();
 
 }

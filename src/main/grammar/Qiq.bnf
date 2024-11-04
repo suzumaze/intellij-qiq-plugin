@@ -33,7 +33,7 @@ private phpBlock ::= (PHP_OPENING_TAG | PHP_ECHO_OPENING_TAG) PHP_CODE? PHP_CLOS
 * ブロックの中身
 * 文またはコメントの連続
 */
-private blockContent ::= (statement | comment)*
+    private blockContent ::= (statement | comment | useStatement)*
 
 /*
 * 文
@@ -123,3 +123,8 @@ private multiplicativeOperator ::= MULTIPLY | DIVIDE | MOD
 * - ドキュメントコメント: /** ... */
 */
 private comment ::= LINE_COMMENT | BLOCK_COMMENT
+
+// use文
+useStatement ::= USE qualifiedName (AS IDENTIFIER)? SEMICOLON?
+
+qualifiedName ::= IDENTIFIER (BACKSLASH IDENTIFIER)*
