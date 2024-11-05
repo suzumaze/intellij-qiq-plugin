@@ -26,5 +26,9 @@
         <lang.formatter
                 language="Qiq"
                 implementationClass="com.github.suzumaze.intellijqiqplugin.QiqFormattingModelBuilder"/>
+        <codeStyleSettingsProvider
+                implementation="com.github.suzumaze.intellijqiqplugin.QiqCodeStyleSettingsProvider"/>
+        <langCodeStyleSettingsProvider
+                implementation="com.github.suzumaze.intellijqiqplugin.QiqLanguageCodeStyleSettingsProvider"/>
     </extensions>
 </idea-plugin>
