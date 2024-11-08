@@ -13,4 +13,7 @@ public interface QiqExpression extends PsiElement {
   @NotNull
   List<QiqExpression> getExpressionList();
 
+  @NotNull
+  List<QiqStringLiteral> getStringLiteralList();
+
 }

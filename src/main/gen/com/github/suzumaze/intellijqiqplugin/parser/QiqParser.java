@@ -528,36 +528,13 @@ public class QiqParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // MULTIPLY | DIVIDE | MOD
-  // /*
-  // * コメント
-  // * - 行コメント: // ...
-  // * - ドキュメントコメント: /** ... */
-  // */
   static boolean multiplicativeOperator(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "multiplicativeOperator")) return false;
     boolean r;
-    Marker m = enter_section_(b);
     r = consumeToken(b, MULTIPLY);
     if (!r) r = consumeToken(b, DIVIDE);
-    if (!r) r = multiplicativeOperator_2(b, l + 1);
-    exit_section_(b, m, null, r);
+    if (!r) r = consumeToken(b, MOD);
     return r;
-  }
-
-  // MOD
-  // /*
-  // * コメント
-  // * - 行コメント: // ...
-  // * - ドキュメントコメント: /** ... */
-  // */
-  private static boolean multiplicativeOperator_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "multiplicativeOperator_2")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!consumeToken(b, MOD)) break;
-      if (!empty_element_parsed_guard_(b, "multiplicativeOperator_2", c)) break;
-    }
-    return true;
   }
 
   /* ********************************************************** */
@@ -674,16 +651,14 @@ public class QiqParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // VARIABLE             // 例: $name
-  //    | SINGLE_QUOTED_STRING  // 例: 'text'
-  //    | DOUBLE_QUOTED_STRING  // 例: "text"
+  //    | stringLiteral      // 例: "text", 'text'
   //    | NUMBER               // 例: 42
   //    | IDENTIFIER
   static boolean simpleExpression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simpleExpression")) return false;
     boolean r;
     r = consumeToken(b, VARIABLE);
-    if (!r) r = consumeToken(b, SINGLE_QUOTED_STRING);
-    if (!r) r = consumeToken(b, DOUBLE_QUOTED_STRING);
+    if (!r) r = stringLiteral(b, l + 1);
     if (!r) r = consumeToken(b, NUMBER);
     if (!r) r = consumeToken(b, IDENTIFIER);
     return r;
@@ -774,6 +749,19 @@ public class QiqParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "statement_1_1")) return false;
     consumeToken(b, COLON);
     return true;
+  }
+
+  /* ********************************************************** */
+  // SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
+  public static boolean stringLiteral(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "stringLiteral")) return false;
+    if (!nextTokenIs(b, "<string literal>", DOUBLE_QUOTED_STRING, SINGLE_QUOTED_STRING)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, STRING_LITERAL, "<string literal>");
+    r = consumeToken(b, SINGLE_QUOTED_STRING);
+    if (!r) r = consumeToken(b, DOUBLE_QUOTED_STRING);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */

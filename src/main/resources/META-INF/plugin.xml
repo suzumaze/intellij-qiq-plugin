@@ -9,7 +9,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <fileType
-                name="Qiq File"
+                name="Qiq"
                 implementationClass="com.github.suzumaze.intellijqiqplugin.QiqFileType"
                 fieldName="INSTANCE"
                 language="Qiq"
@@ -30,5 +30,6 @@
                 implementation="com.github.suzumaze.intellijqiqplugin.QiqCodeStyleSettingsProvider"/>
         <langCodeStyleSettingsProvider
                 implementation="com.github.suzumaze.intellijqiqplugin.QiqLanguageCodeStyleSettingsProvider"/>
+        <psi.referenceContributor language="Qiq" implementation="com.github.suzumaze.intellijqiqplugin.QiqReferenceContributor"/>
     </extensions>
 </idea-plugin>

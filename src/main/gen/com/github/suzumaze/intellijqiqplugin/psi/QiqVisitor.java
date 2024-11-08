@@ -35,6 +35,10 @@ public class QiqVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitStringLiteral(@NotNull QiqStringLiteral o) {
+    visitPsiElement(o);
+  }
+
   public void visitUseStatement(@NotNull QiqUseStatement o) {
     visitPsiElement(o);
   }

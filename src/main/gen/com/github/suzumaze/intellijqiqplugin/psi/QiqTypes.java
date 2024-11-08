@@ -15,6 +15,7 @@ public interface QiqTypes {
   IElementType QIQ_BLOCK = new QiqElementType("QIQ_BLOCK");
   IElementType QUALIFIED_NAME = new QiqElementType("QUALIFIED_NAME");
   IElementType STATEMENT = new QiqElementType("STATEMENT");
+  IElementType STRING_LITERAL = new QiqElementType("STRING_LITERAL");
   IElementType USE_STATEMENT = new QiqElementType("USE_STATEMENT");
 
   IElementType AND_OP = new QiqTokenType("AND_OP");
@@ -88,6 +89,9 @@ public interface QiqTypes {
       }
       else if (type == STATEMENT) {
         return new QiqStatementImpl(node);
+      }
+      else if (type == STRING_LITERAL) {
+        return new QiqStringLiteralImpl(node);
       }
       else if (type == USE_STATEMENT) {
         return new QiqUseStatementImpl(node);

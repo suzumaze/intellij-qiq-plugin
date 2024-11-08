@@ -1,13 +1,18 @@
 {
  parserClass="com.github.suzumaze.intellijqiqplugin.parser.QiqParser"
+
  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
  psiClassPrefix="Qiq"
  psiImplClassSuffix="Impl"
  psiPackage="com.github.suzumaze.intellijqiqplugin.psi"
  psiImplPackage="com.github.suzumaze.intellijqiqplugin.psi.impl"
+
  elementTypeHolderClass="com.github.suzumaze.intellijqiqplugin.psi.QiqTypes"
  elementTypeClass="com.github.suzumaze.intellijqiqplugin.psi.QiqElementType"
  tokenTypeClass="com.github.suzumaze.intellijqiqplugin.psi.QiqTokenType"
+
+ psiImplUtilClass="com.github.suzumaze.intellijqiqplugin.psi.impl.QiqPsiImplUtil"
 }
 
 /*
@@ -19,9 +24,6 @@ private item_ ::= (qiqBlock | phpBlock | TEMPLATE_TEXT | CRLF)
 
 /*
 * ブロック構造
-* - 標準ブロック: {{ ... }} または {{= ... }}
-* - ドキュメントブロック: {{ /** ... */ }}
-* - PHPブロック: <?php ... ?> または <?= ... ?>
 */
 qiqBlock ::= standardBlock | docBlock
 private standardBlock ::= QIQ_OPENING_TAG blockContent QIQ_CLOSING_TAG
@@ -74,10 +76,13 @@ private primaryExpression ::= simpleExpression | complexExpression
 */
 private simpleExpression ::=
    VARIABLE             // 例: $name
-   | SINGLE_QUOTED_STRING  // 例: 'text'
-   | DOUBLE_QUOTED_STRING  // 例: "text"
+   | stringLiteral      // 例: "text", 'text'
    | NUMBER               // 例: 42
    | IDENTIFIER          // 例: name
+
+stringLiteral ::= SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING {
+    methods=[getStringValue getReference]
+}
 
 /*
 * 複合式
@@ -119,8 +124,6 @@ private multiplicativeOperator ::= MULTIPLY | DIVIDE | MOD
 
 /*
 * コメント
-* - 行コメント: // ...
-* - ドキュメントコメント: /** ... */
 */
 private comment ::= LINE_COMMENT | BLOCK_COMMENT
 
