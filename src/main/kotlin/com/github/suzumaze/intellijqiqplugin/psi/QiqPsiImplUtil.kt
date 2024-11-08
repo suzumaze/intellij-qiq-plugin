@@ -7,15 +7,6 @@ import com.intellij.psi.PsiReference
 
 object QiqPsiImplUtil {
     @JvmStatic
-    fun getStringValue(element: QiqStringLiteral): String {
-        val text = element.text
-        return when {
-            text.startsWith('\'') || text.startsWith('"') -> text.substring(1, text.length - 1)
-            else -> text
-        }
-    }
-
-    @JvmStatic
     fun getReference(element: QiqStringLiteral): PsiReference? {
         val value = element.text
         return if (value.contains("/")) {

@@ -81,7 +81,7 @@ private simpleExpression ::=
    | IDENTIFIER          // 例: name
 
 stringLiteral ::= SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING {
-    methods=[getStringValue getReference]
+    methods=[getReference]
 }
 
 /*

@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.suzumaze.intellijqiqplugin.psi.QiqTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.suzumaze.intellijqiqplugin.psi.*;
+import com.intellij.psi.PsiReference;
 
 public class QiqStringLiteralImpl extends ASTWrapperPsiElement implements QiqStringLiteral {
 
@@ -25,6 +26,12 @@ public class QiqStringLiteralImpl extends ASTWrapperPsiElement implements QiqStr
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof QiqVisitor) accept((QiqVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public PsiReference getReference() {
+    return QiqPsiImplUtil.getReference(this);
   }
 
 }
