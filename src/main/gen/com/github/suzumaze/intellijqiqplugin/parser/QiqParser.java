@@ -179,6 +179,30 @@ public class QiqParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // LEFT_BRACKET (expression) RIGHT_BRACKET
+  static boolean arrayAccess(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "arrayAccess")) return false;
+    if (!nextTokenIs(b, LEFT_BRACKET)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LEFT_BRACKET);
+    r = r && arrayAccess_1(b, l + 1);
+    r = r && consumeToken(b, RIGHT_BRACKET);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (expression)
+  private static boolean arrayAccess_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "arrayAccess_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = expression(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // (IDENTIFIER ARROW)? expression
   static boolean arrayElement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "arrayElement")) return false;
@@ -230,7 +254,7 @@ public class QiqParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // primaryExpression (chainOperator primaryExpression)*
+  // primaryExpression (arrayAccess | chainOperator primaryExpression)*
   static boolean chainExpression(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "chainExpression")) return false;
     boolean r;
@@ -241,7 +265,7 @@ public class QiqParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (chainOperator primaryExpression)*
+  // (arrayAccess | chainOperator primaryExpression)*
   private static boolean chainExpression_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "chainExpression_1")) return false;
     while (true) {
@@ -252,9 +276,20 @@ public class QiqParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // chainOperator primaryExpression
+  // arrayAccess | chainOperator primaryExpression
   private static boolean chainExpression_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "chainExpression_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = arrayAccess(b, l + 1);
+    if (!r) r = chainExpression_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // chainOperator primaryExpression
+  private static boolean chainExpression_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "chainExpression_1_0_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = chainOperator(b, l + 1);

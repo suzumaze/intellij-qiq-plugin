@@ -67,7 +67,7 @@ private logicalExpression ::= comparisonExpression (logicalOperator comparisonEx
 private comparisonExpression ::= additiveExpression (comparisonOperator additiveExpression)*
 private additiveExpression ::= multiplicativeExpression (additiveOperator multiplicativeExpression)*
 private multiplicativeExpression ::= chainExpression (multiplicativeOperator chainExpression)*
-private chainExpression ::= primaryExpression (chainOperator primaryExpression)*
+private chainExpression ::= primaryExpression (arrayAccess | chainOperator primaryExpression)*
 private primaryExpression ::= simpleExpression | complexExpression
 
 /*
@@ -121,6 +121,8 @@ private comparisonOperator ::=
    | EQUALS
 private additiveOperator ::= PLUS | MINUS | DOT
 private multiplicativeOperator ::= MULTIPLY | DIVIDE | MOD
+
+private arrayAccess ::= LEFT_BRACKET (expression) RIGHT_BRACKET
 
 /*
 * コメント
