@@ -35,7 +35,7 @@ private phpBlock ::= (PHP_OPENING_TAG | PHP_ECHO_OPENING_TAG) PHP_CODE? PHP_CLOS
 * ブロックの中身
 * 文またはコメントの連続
 */
-    private blockContent ::= (statement | comment | useStatement)*
+private blockContent ::= (statement | comment | useStatement)*
 
 /*
 * 文
@@ -127,7 +127,7 @@ private arrayAccess ::= LEFT_BRACKET (expression) RIGHT_BRACKET
 /*
 * コメント
 */
-private comment ::= LINE_COMMENT | BLOCK_COMMENT
+private comment ::= LINE_COMMENT | BLOCK_COMMENT | DOC_COMMENT
 
 // use文
 useStatement ::= USE qualifiedName (AS IDENTIFIER)? SEMICOLON?

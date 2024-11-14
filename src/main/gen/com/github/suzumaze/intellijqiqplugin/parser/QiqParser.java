@@ -311,13 +311,13 @@ public class QiqParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LINE_COMMENT | BLOCK_COMMENT
+  // LINE_COMMENT | BLOCK_COMMENT | DOC_COMMENT
   static boolean comment(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "comment")) return false;
-    if (!nextTokenIs(b, "", BLOCK_COMMENT, LINE_COMMENT)) return false;
     boolean r;
     r = consumeToken(b, LINE_COMMENT);
     if (!r) r = consumeToken(b, BLOCK_COMMENT);
+    if (!r) r = consumeToken(b, DOC_COMMENT);
     return r;
   }
 
