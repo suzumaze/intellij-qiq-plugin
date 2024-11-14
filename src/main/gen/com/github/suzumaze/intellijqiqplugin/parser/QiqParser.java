@@ -264,11 +264,12 @@ public class QiqParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // OBJECT_OPERATOR | ARROW | AS
+  // OBJECT_OPERATOR | NULL_SAFE_OPERATOR | ARROW | AS
   static boolean chainOperator(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "chainOperator")) return false;
     boolean r;
     r = consumeToken(b, OBJECT_OPERATOR);
+    if (!r) r = consumeToken(b, NULL_SAFE_OPERATOR);
     if (!r) r = consumeToken(b, ARROW);
     if (!r) r = consumeToken(b, AS);
     return r;

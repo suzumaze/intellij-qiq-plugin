@@ -72,6 +72,7 @@ USE     = "use"
     "<="                   { return QiqTypes.LESS_EQUAL; }
     "=>"                   { return QiqTypes.ARROW; }
     "->"                   { return QiqTypes.OBJECT_OPERATOR; }
+    "?->"                  { return QiqTypes.NULL_SAFE_OPERATOR; }
     "&&"                   { return QiqTypes.AND_OP; }
     "||"                   { return QiqTypes.OR_OP; }
 

@@ -47,6 +47,7 @@ public interface QiqTypes {
   IElementType NOT_EQUAL = new QiqTokenType("NOT_EQUAL");
   IElementType NOT_IDENTICAL = new QiqTokenType("NOT_IDENTICAL");
   IElementType NOT_OP = new QiqTokenType("NOT_OP");
+  IElementType NULL_SAFE_OPERATOR = new QiqTokenType("NULL_SAFE_OPERATOR");
   IElementType NUMBER = new QiqTokenType("NUMBER");
   IElementType OBJECT_OPERATOR = new QiqTokenType("OBJECT_OPERATOR");
   IElementType OR_OP = new QiqTokenType("OR_OP");
