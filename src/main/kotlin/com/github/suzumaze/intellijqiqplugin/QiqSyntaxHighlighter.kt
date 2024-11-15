@@ -75,6 +75,7 @@ class QiqSyntaxHighlighter : SyntaxHighlighterBase() {
                 pack(PHP_CODE)
 
             // キーワード
+            QiqTypes.USE,
             QiqTypes.AS ->
                 pack(KEYWORD)
 

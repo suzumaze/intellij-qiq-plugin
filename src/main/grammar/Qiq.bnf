@@ -132,4 +132,6 @@ private comment ::= LINE_COMMENT | BLOCK_COMMENT | DOC_COMMENT
 // use文
 useStatement ::= USE qualifiedName (AS IDENTIFIER)? SEMICOLON?
 
-qualifiedName ::= IDENTIFIER (BACKSLASH IDENTIFIER)*
+qualifiedName ::= IDENTIFIER (BACKSLASH IDENTIFIER)* {
+    methods=[getReference]
+}
