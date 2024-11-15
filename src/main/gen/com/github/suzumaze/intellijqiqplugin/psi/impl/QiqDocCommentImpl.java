@@ -11,14 +11,14 @@ import static com.github.suzumaze.intellijqiqplugin.psi.QiqTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.suzumaze.intellijqiqplugin.psi.*;
 
-public class QiqQiqBlockImpl extends ASTWrapperPsiElement implements QiqQiqBlock {
+public class QiqDocCommentImpl extends ASTWrapperPsiElement implements QiqDocComment {
 
-  public QiqQiqBlockImpl(@NotNull ASTNode node) {
+  public QiqDocCommentImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull QiqVisitor visitor) {
-    visitor.visitQiqBlock(this);
+    visitor.visitDocComment(this);
   }
 
   @Override
@@ -29,20 +29,8 @@ public class QiqQiqBlockImpl extends ASTWrapperPsiElement implements QiqQiqBlock
 
   @Override
   @NotNull
-  public List<QiqDocComment> getDocCommentList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqDocComment.class);
-  }
-
-  @Override
-  @NotNull
-  public List<QiqStatement> getStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqStatement.class);
-  }
-
-  @Override
-  @NotNull
-  public List<QiqUseStatement> getUseStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqUseStatement.class);
+  public List<QiqDocElement> getDocElementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqDocElement.class);
   }
 
 }

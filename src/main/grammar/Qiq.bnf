@@ -28,7 +28,7 @@ private item_ ::= (qiqBlock | phpBlock | TEMPLATE_TEXT | CRLF)
 qiqBlock ::= standardBlock | docBlock
 private standardBlock ::= QIQ_OPENING_TAG blockContent QIQ_CLOSING_TAG
                       | QIQ_ECHO_OPENING_TAG blockContent QIQ_CLOSING_TAG
-private docBlock ::= QIQ_OPENING_TAG DOC_COMMENT QIQ_CLOSING_TAG
+private docBlock ::= QIQ_OPENING_TAG docComment QIQ_CLOSING_TAG
 private phpBlock ::= (PHP_OPENING_TAG | PHP_ECHO_OPENING_TAG) PHP_CODE? PHP_CLOSING_TAG
 
 /*
@@ -127,7 +127,7 @@ private arrayAccess ::= LEFT_BRACKET (expression) RIGHT_BRACKET
 /*
 * コメント
 */
-private comment ::= LINE_COMMENT | BLOCK_COMMENT | DOC_COMMENT
+private comment ::= LINE_COMMENT | docComment
 
 // use文
 useStatement ::= USE qualifiedName (AS IDENTIFIER)? SEMICOLON?
@@ -135,3 +135,15 @@ useStatement ::= USE qualifiedName (AS IDENTIFIER)? SEMICOLON?
 qualifiedName ::= IDENTIFIER (BACKSLASH IDENTIFIER)* {
     methods=[getReference]
 }
+
+docComment ::= DOC_COMMENT_START docElement* DOC_COMMENT_END
+
+docElement ::= tagVar | otherDocText
+
+tagVar ::= DOC_TAG_NAME docQualifiedName DOC_VARIABLE
+
+docQualifiedName ::= DOC_IDENTIFIER (BACKSLASH DOC_IDENTIFIER)* {
+    methods=[getReference]
+}
+
+otherDocText ::= DOC_COMMENT_TEXT

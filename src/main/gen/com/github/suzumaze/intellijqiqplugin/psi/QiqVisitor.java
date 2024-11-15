@@ -11,6 +11,18 @@ public class QiqVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitDocComment(@NotNull QiqDocComment o) {
+    visitPsiElement(o);
+  }
+
+  public void visitDocElement(@NotNull QiqDocElement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitDocQualifiedName(@NotNull QiqDocQualifiedName o) {
+    visitPsiElement(o);
+  }
+
   public void visitExpression(@NotNull QiqExpression o) {
     visitPsiElement(o);
   }
@@ -20,6 +32,10 @@ public class QiqVisitor extends PsiElementVisitor {
   }
 
   public void visitNamedArgument(@NotNull QiqNamedArgument o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOtherDocText(@NotNull QiqOtherDocText o) {
     visitPsiElement(o);
   }
 
@@ -36,6 +52,10 @@ public class QiqVisitor extends PsiElementVisitor {
   }
 
   public void visitStringLiteral(@NotNull QiqStringLiteral o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTagVar(@NotNull QiqTagVar o) {
     visitPsiElement(o);
   }
 

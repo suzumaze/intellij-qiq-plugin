@@ -25,7 +25,6 @@ DOUBLE_QUOTED_STRING = \"([^\"\r\n\\]|\\[^\r\n])*\"
 SINGLE_QUOTED_STRING = '([^'\r\n\\]|\\[^\r\n])*'
 
 LINE_COMMENT     = "//"[^\r\n\}]*
-DOC_COMMENT      = "/**" ([^*] | \*[^/])* \*"/"
 
 QIQ_OPENING_TAG      = "{{" [hucja]?
 QIQ_ECHO_OPENING_TAG = "{{="
@@ -38,8 +37,13 @@ PHP_CLOSING_TAG      = "?>"
 AS      = "as"
 USE     = "use"
 
+DOC_COMMENT_START = "/**"
+DOC_COMMENT_END = "*/"
+DOC_TAG = "@"[a-zA-Z]+
+
 %state IN_QIQ
 %state IN_PHP
+%state IN_DOC_COMMENT
 
 %%
 
@@ -60,9 +64,10 @@ USE     = "use"
 
 <IN_QIQ> {
     {QIQ_CLOSING_TAG}       { yybegin(YYINITIAL); return QiqTypes.QIQ_CLOSING_TAG; }
+    {DOC_COMMENT_START}     { yybegin(IN_DOC_COMMENT); return QiqTypes.DOC_COMMENT_START; }
 
     {AS}                   { return QiqTypes.AS; }
-    {USE}                   { return QiqTypes.USE; }
+    {USE}                  { return QiqTypes.USE; }
 
     "==="                  { return QiqTypes.IDENTICAL; }
     "!=="                  { return QiqTypes.NOT_IDENTICAL; }
@@ -97,7 +102,6 @@ USE     = "use"
     "]"                    { return QiqTypes.RIGHT_BRACKET; }
 
     {LINE_COMMENT}         { return QiqTypes.LINE_COMMENT; }
-    {DOC_COMMENT}          { return QiqTypes.DOC_COMMENT; }
 
     {VARIABLE}             { return QiqTypes.VARIABLE; }
     {DOUBLE_QUOTED_STRING} { return QiqTypes.DOUBLE_QUOTED_STRING; }
@@ -107,6 +111,16 @@ USE     = "use"
 
     {WHITE_SPACE}+         { return TokenType.WHITE_SPACE; }
     {CRLF}                 { return QiqTypes.CRLF; }
+}
+
+<IN_DOC_COMMENT> {
+    {DOC_COMMENT_END}      { yybegin(IN_QIQ); return QiqTypes.DOC_COMMENT_END; }
+    {DOC_TAG}              { return QiqTypes.DOC_TAG_NAME; }
+    {IDENTIFIER}           { return QiqTypes.DOC_IDENTIFIER; }
+    "\\"                   { return QiqTypes.BACKSLASH; }
+    {VARIABLE}             { return QiqTypes.DOC_VARIABLE; }
+    {WHITE_SPACE}+         { return TokenType.WHITE_SPACE; }
+    .                      { return QiqTypes.DOC_COMMENT_TEXT; }
 }
 
 [^]                        { return TokenType.BAD_CHARACTER; }

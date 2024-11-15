@@ -9,25 +9,34 @@ import com.github.suzumaze.intellijqiqplugin.psi.impl.*;
 public interface QiqTypes {
 
   IElementType ARRAY = new QiqElementType("ARRAY");
+  IElementType DOC_COMMENT = new QiqElementType("DOC_COMMENT");
+  IElementType DOC_ELEMENT = new QiqElementType("DOC_ELEMENT");
+  IElementType DOC_QUALIFIED_NAME = new QiqElementType("DOC_QUALIFIED_NAME");
   IElementType EXPRESSION = new QiqElementType("EXPRESSION");
   IElementType FUNCTION_CALL = new QiqElementType("FUNCTION_CALL");
   IElementType NAMED_ARGUMENT = new QiqElementType("NAMED_ARGUMENT");
+  IElementType OTHER_DOC_TEXT = new QiqElementType("OTHER_DOC_TEXT");
   IElementType QIQ_BLOCK = new QiqElementType("QIQ_BLOCK");
   IElementType QUALIFIED_NAME = new QiqElementType("QUALIFIED_NAME");
   IElementType STATEMENT = new QiqElementType("STATEMENT");
   IElementType STRING_LITERAL = new QiqElementType("STRING_LITERAL");
+  IElementType TAG_VAR = new QiqElementType("TAG_VAR");
   IElementType USE_STATEMENT = new QiqElementType("USE_STATEMENT");
 
   IElementType AND_OP = new QiqTokenType("AND_OP");
   IElementType ARROW = new QiqTokenType("ARROW");
   IElementType AS = new QiqTokenType("AS");
   IElementType BACKSLASH = new QiqTokenType("BACKSLASH");
-  IElementType BLOCK_COMMENT = new QiqTokenType("BLOCK_COMMENT");
   IElementType COLON = new QiqTokenType("COLON");
   IElementType COMMA = new QiqTokenType("COMMA");
   IElementType CRLF = new QiqTokenType("CRLF");
   IElementType DIVIDE = new QiqTokenType("DIVIDE");
-  IElementType DOC_COMMENT = new QiqTokenType("DOC_COMMENT");
+  IElementType DOC_COMMENT_END = new QiqTokenType("DOC_COMMENT_END");
+  IElementType DOC_COMMENT_START = new QiqTokenType("DOC_COMMENT_START");
+  IElementType DOC_COMMENT_TEXT = new QiqTokenType("DOC_COMMENT_TEXT");
+  IElementType DOC_IDENTIFIER = new QiqTokenType("DOC_IDENTIFIER");
+  IElementType DOC_TAG_NAME = new QiqTokenType("DOC_TAG_NAME");
+  IElementType DOC_VARIABLE = new QiqTokenType("DOC_VARIABLE");
   IElementType DOT = new QiqTokenType("DOT");
   IElementType DOUBLE_QUOTED_STRING = new QiqTokenType("DOUBLE_QUOTED_STRING");
   IElementType EQUALS = new QiqTokenType("EQUALS");
@@ -73,6 +82,15 @@ public interface QiqTypes {
       if (type == ARRAY) {
         return new QiqArrayImpl(node);
       }
+      else if (type == DOC_COMMENT) {
+        return new QiqDocCommentImpl(node);
+      }
+      else if (type == DOC_ELEMENT) {
+        return new QiqDocElementImpl(node);
+      }
+      else if (type == DOC_QUALIFIED_NAME) {
+        return new QiqDocQualifiedNameImpl(node);
+      }
       else if (type == EXPRESSION) {
         return new QiqExpressionImpl(node);
       }
@@ -81,6 +99,9 @@ public interface QiqTypes {
       }
       else if (type == NAMED_ARGUMENT) {
         return new QiqNamedArgumentImpl(node);
+      }
+      else if (type == OTHER_DOC_TEXT) {
+        return new QiqOtherDocTextImpl(node);
       }
       else if (type == QIQ_BLOCK) {
         return new QiqQiqBlockImpl(node);
@@ -93,6 +114,9 @@ public interface QiqTypes {
       }
       else if (type == STRING_LITERAL) {
         return new QiqStringLiteralImpl(node);
+      }
+      else if (type == TAG_VAR) {
+        return new QiqTagVarImpl(node);
       }
       else if (type == USE_STATEMENT) {
         return new QiqUseStatementImpl(node);

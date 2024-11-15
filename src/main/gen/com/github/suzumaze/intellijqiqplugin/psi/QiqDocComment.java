@@ -5,15 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface QiqQiqBlock extends PsiElement {
+public interface QiqDocComment extends PsiElement {
 
   @NotNull
-  List<QiqDocComment> getDocCommentList();
-
-  @NotNull
-  List<QiqStatement> getStatementList();
-
-  @NotNull
-  List<QiqUseStatement> getUseStatementList();
+  List<QiqDocElement> getDocElementList();
 
 }

@@ -311,13 +311,13 @@ public class QiqParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LINE_COMMENT | BLOCK_COMMENT | DOC_COMMENT
+  // LINE_COMMENT | docComment
   static boolean comment(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "comment")) return false;
+    if (!nextTokenIs(b, "", DOC_COMMENT_START, LINE_COMMENT)) return false;
     boolean r;
     r = consumeToken(b, LINE_COMMENT);
-    if (!r) r = consumeToken(b, BLOCK_COMMENT);
-    if (!r) r = consumeToken(b, DOC_COMMENT);
+    if (!r) r = docComment(b, l + 1);
     return r;
   }
 
@@ -415,13 +415,87 @@ public class QiqParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // QIQ_OPENING_TAG DOC_COMMENT QIQ_CLOSING_TAG
+  // QIQ_OPENING_TAG docComment QIQ_CLOSING_TAG
   static boolean docBlock(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "docBlock")) return false;
     if (!nextTokenIs(b, QIQ_OPENING_TAG)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, QIQ_OPENING_TAG, DOC_COMMENT, QIQ_CLOSING_TAG);
+    r = consumeToken(b, QIQ_OPENING_TAG);
+    r = r && docComment(b, l + 1);
+    r = r && consumeToken(b, QIQ_CLOSING_TAG);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // DOC_COMMENT_START docElement* DOC_COMMENT_END
+  public static boolean docComment(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "docComment")) return false;
+    if (!nextTokenIs(b, DOC_COMMENT_START)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, DOC_COMMENT_START);
+    r = r && docComment_1(b, l + 1);
+    r = r && consumeToken(b, DOC_COMMENT_END);
+    exit_section_(b, m, DOC_COMMENT, r);
+    return r;
+  }
+
+  // docElement*
+  private static boolean docComment_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "docComment_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!docElement(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "docComment_1", c)) break;
+    }
+    return true;
+  }
+
+  /* ********************************************************** */
+  // tagVar | otherDocText
+  public static boolean docElement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "docElement")) return false;
+    if (!nextTokenIs(b, "<doc element>", DOC_COMMENT_TEXT, DOC_TAG_NAME)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, DOC_ELEMENT, "<doc element>");
+    r = tagVar(b, l + 1);
+    if (!r) r = otherDocText(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // DOC_IDENTIFIER (BACKSLASH DOC_IDENTIFIER)*
+  public static boolean docQualifiedName(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "docQualifiedName")) return false;
+    if (!nextTokenIs(b, DOC_IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, DOC_IDENTIFIER);
+    r = r && docQualifiedName_1(b, l + 1);
+    exit_section_(b, m, DOC_QUALIFIED_NAME, r);
+    return r;
+  }
+
+  // (BACKSLASH DOC_IDENTIFIER)*
+  private static boolean docQualifiedName_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "docQualifiedName_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!docQualifiedName_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "docQualifiedName_1", c)) break;
+    }
+    return true;
+  }
+
+  // BACKSLASH DOC_IDENTIFIER
+  private static boolean docQualifiedName_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "docQualifiedName_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, BACKSLASH, DOC_IDENTIFIER);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -583,6 +657,18 @@ public class QiqParser implements PsiParser, LightPsiParser {
     r = consumeTokens(b, 0, IDENTIFIER, COLON);
     r = r && expression(b, l + 1);
     exit_section_(b, m, NAMED_ARGUMENT, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // DOC_COMMENT_TEXT
+  public static boolean otherDocText(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "otherDocText")) return false;
+    if (!nextTokenIs(b, DOC_COMMENT_TEXT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, DOC_COMMENT_TEXT);
+    exit_section_(b, m, OTHER_DOC_TEXT, r);
     return r;
   }
 
@@ -797,6 +883,20 @@ public class QiqParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, SINGLE_QUOTED_STRING);
     if (!r) r = consumeToken(b, DOUBLE_QUOTED_STRING);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // DOC_TAG_NAME docQualifiedName DOC_VARIABLE
+  public static boolean tagVar(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "tagVar")) return false;
+    if (!nextTokenIs(b, DOC_TAG_NAME)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, DOC_TAG_NAME);
+    r = r && docQualifiedName(b, l + 1);
+    r = r && consumeToken(b, DOC_VARIABLE);
+    exit_section_(b, m, TAG_VAR, r);
     return r;
   }
 
