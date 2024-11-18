@@ -7,12 +7,14 @@ import com.jetbrains.php.PhpIndex
 
 class QiqClassReference(
     element: PsiElement,
-    private val qualifiedName: String
+    private val className: String
 ) : PsiReferenceBase<PsiElement>(element, TextRange(0, element.textLength)) {
     override fun resolve(): PsiElement? {
         val project = element.project
-        return PhpIndex.getInstance(project)
-            .getClassesByFQN(qualifiedName)
-            .firstOrNull()
+        val phpIndex = PhpIndex.getInstance(project)
+
+        phpIndex.getClassesByFQN(className).firstOrNull()?.let { return it }
+
+        return phpIndex.getClassesByName(className).firstOrNull()
     }
 }

@@ -2,6 +2,7 @@ package com.github.suzumaze.intellijqiqplugin.psi.impl
 
 import com.github.suzumaze.intellijqiqplugin.QiqClassReference
 import com.github.suzumaze.intellijqiqplugin.QiqReference
+import com.github.suzumaze.intellijqiqplugin.psi.QiqDocQualifiedName
 import com.github.suzumaze.intellijqiqplugin.psi.QiqQualifiedName
 import com.github.suzumaze.intellijqiqplugin.psi.QiqStringLiteral
 import com.intellij.openapi.util.TextRange
@@ -21,6 +22,11 @@ object QiqPsiImplUtil {
 
     @JvmStatic
     fun getReference(element: QiqQualifiedName): PsiReference {
+        return QiqClassReference(element, element.text)
+    }
+
+    @JvmStatic
+    fun getReference(element: QiqDocQualifiedName): PsiReference {
         return QiqClassReference(element, element.text)
     }
 }
