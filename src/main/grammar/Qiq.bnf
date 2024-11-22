@@ -12,7 +12,7 @@
  elementTypeClass="com.github.suzumaze.intellijqiqplugin.psi.QiqElementType"
  tokenTypeClass="com.github.suzumaze.intellijqiqplugin.psi.QiqTokenType"
 
- psiImplUtilClass="com.github.suzumaze.intellijqiqplugin.psi.impl.QiqPsiImplUtil"
+ psiImplUtilClass="com.github.suzumaze.intellijqiqplugin.psi.QiqPsiImplUtil"
 }
 
 /*
