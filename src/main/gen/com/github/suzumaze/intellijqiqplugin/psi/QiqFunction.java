@@ -4,16 +4,11 @@ package com.github.suzumaze.intellijqiqplugin.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 
-public interface QiqFunctionCall extends PsiElement {
-
-  @NotNull
-  List<QiqExpression> getExpressionList();
+public interface QiqFunction extends PsiElement {
 
   @NotNull
-  QiqFunction getFunction();
-
-  @NotNull
-  List<QiqNamedArgument> getNamedArgumentList();
+  PsiReference getReference();
 
 }

@@ -10,15 +10,16 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.suzumaze.intellijqiqplugin.psi.QiqTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.suzumaze.intellijqiqplugin.psi.*;
+import com.intellij.psi.PsiReference;
 
-public class QiqFunctionCallImpl extends ASTWrapperPsiElement implements QiqFunctionCall {
+public class QiqFunctionImpl extends ASTWrapperPsiElement implements QiqFunction {
 
-  public QiqFunctionCallImpl(@NotNull ASTNode node) {
+  public QiqFunctionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull QiqVisitor visitor) {
-    visitor.visitFunctionCall(this);
+    visitor.visitFunction(this);
   }
 
   @Override
@@ -29,20 +30,8 @@ public class QiqFunctionCallImpl extends ASTWrapperPsiElement implements QiqFunc
 
   @Override
   @NotNull
-  public List<QiqExpression> getExpressionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqExpression.class);
-  }
-
-  @Override
-  @NotNull
-  public QiqFunction getFunction() {
-    return findNotNullChildByClass(QiqFunction.class);
-  }
-
-  @Override
-  @NotNull
-  public List<QiqNamedArgument> getNamedArgumentList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqNamedArgument.class);
+  public PsiReference getReference() {
+    return QiqPsiImplUtil.getReference(this);
   }
 
 }
