@@ -1,0 +1,133 @@
+{
+ parserClass="com.github.suzumaze.intellijqiqplugin.parser.QiqParser"
+
+ extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+ psiClassPrefix="Qiq"
+ psiImplClassSuffix="Impl"
+ psiPackage="com.github.suzumaze.intellijqiqplugin.psi"
+ psiImplPackage="com.github.suzumaze.intellijqiqplugin.psi.impl"
+
+ elementTypeHolderClass="com.github.suzumaze.intellijqiqplugin.psi.QiqTypes"
+ elementTypeClass="com.github.suzumaze.intellijqiqplugin.psi.QiqElementType"
+ tokenTypeClass="com.github.suzumaze.intellijqiqplugin.psi.QiqTokenType"
+
+ psiImplUtilClass="com.github.suzumaze.intellijqiqplugin.psi.impl.QiqPsiImplUtil"
+}
+
+/*
+* ファイル構造
+* Qiqテンプレートの全体構造を定義
+*/
+qiqFile ::= item_*
+private item_ ::= (qiqBlock | phpBlock | TEMPLATE_TEXT | CRLF)
+
+/*
+* ブロック構造
+*/
+qiqBlock ::= standardBlock | docBlock
+private standardBlock ::= QIQ_OPENING_TAG blockContent QIQ_CLOSING_TAG
+                      | QIQ_ECHO_OPENING_TAG blockContent QIQ_CLOSING_TAG
+private docBlock ::= QIQ_OPENING_TAG DOC_COMMENT QIQ_CLOSING_TAG
+private phpBlock ::= (PHP_OPENING_TAG | PHP_ECHO_OPENING_TAG) PHP_CODE? PHP_CLOSING_TAG
+
+/*
+* ブロックの中身
+* 文またはコメントの連続
+*/
+    private blockContent ::= (statement | comment | useStatement)*
+
+/*
+* 文
+* 関数呼び出しと式を独立して扱う
+* コロンはオプショナル（制御構文で使用）
+*/
+statement ::= functionCall COLON?
+          | expression COLON?
+
+/*
+* 関数呼び出し
+* - 引数なしの場合: parentBlock()
+* - 引数ありの場合: textField(name: 'street', value: $street)
+* - 末尾カンマを許可: textField(name: 'street',)
+*/
+functionCall ::= IDENTIFIER LEFT_PAREN RIGHT_PAREN
+              | IDENTIFIER LEFT_PAREN argumentList COMMA? RIGHT_PAREN
+
+private argumentList ::= argument (COMMA argument)*
+
+private argument ::= namedArgument | expression
+
+/*
+* 式の階層
+* 演算子の優先順位に従って階層化
+*/
+expression ::= logicalExpression
+private logicalExpression ::= comparisonExpression (logicalOperator comparisonExpression)*
+private comparisonExpression ::= additiveExpression (comparisonOperator additiveExpression)*
+private additiveExpression ::= multiplicativeExpression (additiveOperator multiplicativeExpression)*
+private multiplicativeExpression ::= chainExpression (multiplicativeOperator chainExpression)*
+private chainExpression ::= primaryExpression (chainOperator primaryExpression)*
+private primaryExpression ::= simpleExpression | complexExpression
+
+/*
+* 基本式
+* 変数、文字列、数値、識別子
+*/
+private simpleExpression ::=
+   VARIABLE             // 例: $name
+   | stringLiteral      // 例: "text", 'text'
+   | NUMBER               // 例: 42
+   | IDENTIFIER          // 例: name
+
+stringLiteral ::= SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING {
+    methods=[getReference]
+}
+
+/*
+* 複合式
+* 括弧で囲まれた式、否定、配列
+*/
+private complexExpression ::=
+   LEFT_PAREN expression RIGHT_PAREN
+   | NOT_OP expression
+   | array
+
+/*
+* 配列
+* - 空配列: []
+* - 値の配列: [1, 2, 3]
+* - キー・バリューの配列: ['key' => 'value']
+*/
+array ::= LEFT_BRACKET (arrayElement (COMMA arrayElement)*)? RIGHT_BRACKET
+private arrayElement ::= (IDENTIFIER ARROW)? expression
+
+/*
+* 名前付き引数
+* 例: name: 'value'
+*/
+namedArgument ::= IDENTIFIER COLON expression
+
+/*
+* 演算子の定義
+*/
+private chainOperator ::= OBJECT_OPERATOR | ARROW | AS
+private logicalOperator ::= AND_OP | OR_OP
+private comparisonOperator ::=
+   EQUAL_TO | NOT_EQUAL
+   | IDENTICAL | NOT_IDENTICAL
+   | GREATER_THAN | LESS_THAN
+   | GREATER_EQUAL | LESS_EQUAL
+   | EQUALS
+private additiveOperator ::= PLUS | MINUS | DOT
+private multiplicativeOperator ::= MULTIPLY | DIVIDE | MOD
+
+/*
+* コメント
+*/
+private comment ::= LINE_COMMENT | BLOCK_COMMENT
+
+// use文
+useStatement ::= USE qualifiedName (AS IDENTIFIER)? SEMICOLON?
+
+qualifiedName ::= IDENTIFIER (BACKSLASH IDENTIFIER)*

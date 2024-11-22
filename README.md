@@ -49,3 +49,15 @@ Plugin based on the [IntelliJ Platform Plugin Template][template].
 
 [template]: https://github.com/JetBrains/intellij-platform-plugin-template
 [docs:plugin-description]: https://plugins.jetbrains.com/docs/intellij/plugin-user-experience.html#plugin-description-and-presentation
+
+
+## References and Resources
+
+- [Custom Language Support Tutorial](https://plugins.jetbrains.com/docs/intellij/custom-language-support.html)
+
+- Similar Projects
+  - [intellij-plugins](https://github.com/JetBrains/intellij-plugins/)
+  - [intellij-latte](https://github.com/nette-intellij/intellij-latte)
+
+  The source code for the Twig and Blade plugins is currently closed-source.
+  The Smarty plugin is included with the PHP library com.jetbrains.php via Gradle.

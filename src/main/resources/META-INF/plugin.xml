@@ -1,18 +1,35 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.suzumaze.intellijqiqplugin</id>
-    <name>intellij-qiq-plugin</name>
+    <name>Qiq</name>
     <vendor>suzumaze</vendor>
 
     <depends>com.intellij.modules.platform</depends>
-
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <depends>com.jetbrains.php</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.suzumaze.intellijqiqplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <fileType
+                name="Qiq"
+                implementationClass="com.github.suzumaze.intellijqiqplugin.QiqFileType"
+                fieldName="INSTANCE"
+                language="Qiq"
+                patterns="*.qiq.php"/>
+        <lang.parserDefinition
+                language="Qiq"
+                implementationClass="com.github.suzumaze.intellijqiqplugin.QiqParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="Qiq"
+                implementationClass="com.github.suzumaze.intellijqiqplugin.QiqSyntaxHighlighterFactory"/>
+        <colorSettingsPage
+                implementation="com.github.suzumaze.intellijqiqplugin.QiqColorSettingsPage"/>
+        <editorHighlighterProvider filetype="Qiq" implementationClass="com.github.suzumaze.intellijqiqplugin.QiqEditorHighlighterProvider"/>
+        <lang.formatter
+                language="Qiq"
+                implementationClass="com.github.suzumaze.intellijqiqplugin.QiqFormattingModelBuilder"/>
+        <codeStyleSettingsProvider
+                implementation="com.github.suzumaze.intellijqiqplugin.QiqCodeStyleSettingsProvider"/>
+        <langCodeStyleSettingsProvider
+                implementation="com.github.suzumaze.intellijqiqplugin.QiqLanguageCodeStyleSettingsProvider"/>
+        <psi.referenceContributor language="Qiq" implementation="com.github.suzumaze.intellijqiqplugin.QiqReferenceContributor"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.suzumaze.intellijqiqplugin.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
 </idea-plugin>

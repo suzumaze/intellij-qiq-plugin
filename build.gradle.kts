@@ -4,6 +4,7 @@ import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
 plugins {
     id("java") // Java support
+    id("org.jetbrains.grammarkit") version "2022.3.1"
     alias(libs.plugins.kotlin) // Kotlin support
     alias(libs.plugins.intelliJPlatform) // IntelliJ Platform Gradle Plugin
     alias(libs.plugins.changelog) // Gradle Changelog Plugin
@@ -155,3 +156,5 @@ intellijPlatformTesting {
         }
     }
 }
+
+sourceSets["main"].java.srcDirs("src/main/gen")
