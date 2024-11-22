@@ -25,11 +25,11 @@ internal class QiqLanguageCodeStyleSettingsProvider : LanguageCodeStyleSettingsP
         }
     }
 
-    override fun getIndentOptionsEditor(): IndentOptionsEditor? {
+    override fun getIndentOptionsEditor(): IndentOptionsEditor {
         return IndentOptionsEditor()
     }
 
-    override fun getCodeSample(@NotNull settingsType: SettingsType): String? {
+    override fun getCodeSample(@NotNull settingsType: SettingsType): String {
         return """
         {{ setBlock ('local-nav') }}
             <p><a href="/foo">Foo</a></p>

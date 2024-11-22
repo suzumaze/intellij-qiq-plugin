@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface QiqQiqBlock extends PsiElement {
 
   @NotNull
+  List<QiqDocComment> getDocCommentList();
+
+  @NotNull
   List<QiqStatement> getStatementList();
 
   @NotNull

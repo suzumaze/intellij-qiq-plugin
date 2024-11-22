@@ -11,11 +11,11 @@ import org.jetbrains.annotations.NotNull
 
 
 internal class QiqCodeStyleSettingsProvider : CodeStyleSettingsProvider() {
-    override fun createCustomSettings(@NotNull settings: CodeStyleSettings): CustomCodeStyleSettings? {
+    override fun createCustomSettings(@NotNull settings: CodeStyleSettings): CustomCodeStyleSettings {
         return QiqCodeStyleSettings(settings)
     }
 
-    override fun getConfigurableDisplayName(): String? {
+    override fun getConfigurableDisplayName(): String {
         return "Qiq"
     }
 

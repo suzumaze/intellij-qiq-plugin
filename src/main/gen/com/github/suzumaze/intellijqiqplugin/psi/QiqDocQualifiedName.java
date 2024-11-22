@@ -6,7 +6,7 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 
-public interface QiqQualifiedName extends PsiElement {
+public interface QiqDocQualifiedName extends PsiElement {
 
   @NotNull
   PsiReference getReference();

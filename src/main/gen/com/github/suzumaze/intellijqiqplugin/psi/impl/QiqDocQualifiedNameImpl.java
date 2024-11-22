@@ -12,14 +12,14 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.suzumaze.intellijqiqplugin.psi.*;
 import com.intellij.psi.PsiReference;
 
-public class QiqQualifiedNameImpl extends ASTWrapperPsiElement implements QiqQualifiedName {
+public class QiqDocQualifiedNameImpl extends ASTWrapperPsiElement implements QiqDocQualifiedName {
 
-  public QiqQualifiedNameImpl(@NotNull ASTNode node) {
+  public QiqDocQualifiedNameImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull QiqVisitor visitor) {
-    visitor.visitQualifiedName(this);
+    visitor.visitDocQualifiedName(this);
   }
 
   @Override

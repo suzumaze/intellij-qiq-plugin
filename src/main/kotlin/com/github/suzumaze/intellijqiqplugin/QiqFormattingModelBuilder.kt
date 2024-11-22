@@ -74,4 +74,12 @@ private fun createSpaceBuilder(settings: CodeStyleSettings): SpacingBuilder {
 
         // オブジェクト演算子（->）
         .around(QiqTypes.OBJECT_OPERATOR).none()
+
+        // PHP DOCコメント
+        .after(QiqTypes.DOC_COMMENT_START).spaceIf(true)
+        .before(QiqTypes.DOC_COMMENT_END).spaceIf(true)
+
+        .around(QiqTypes.DOC_IDENTIFIER).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_ADDITIVE_OPERATORS)
+        .around(QiqTypes.DOC_TAG_NAME).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_ADDITIVE_OPERATORS)
+        .around(QiqTypes.DOC_VARIABLE).spaceIf(settings.getCommonSettings(QiqLanguage.INSTANCE.id).SPACE_AROUND_ADDITIVE_OPERATORS)
 }

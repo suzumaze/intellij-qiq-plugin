@@ -29,6 +29,12 @@ public class QiqQiqBlockImpl extends ASTWrapperPsiElement implements QiqQiqBlock
 
   @Override
   @NotNull
+  public List<QiqDocComment> getDocCommentList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqDocComment.class);
+  }
+
+  @Override
+  @NotNull
   public List<QiqStatement> getStatementList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, QiqStatement.class);
   }

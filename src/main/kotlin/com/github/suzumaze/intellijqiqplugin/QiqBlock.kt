@@ -15,7 +15,7 @@ open class QiqBlock(
         while (child != null) {
             if (child.elementType !== TokenType.WHITE_SPACE) {
                 val block: Block = QiqBlock(
-                    child, Wrap.createWrap(WrapType.NONE, false), Alignment.createAlignment(),
+                    child, Wrap.createWrap(WrapType.NONE, false), null,
                     spacingBuilder
                 )
                 blocks.add(block)

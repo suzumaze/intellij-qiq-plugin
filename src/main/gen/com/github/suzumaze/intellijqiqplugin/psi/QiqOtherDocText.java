@@ -4,11 +4,7 @@ package com.github.suzumaze.intellijqiqplugin.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
 
-public interface QiqQualifiedName extends PsiElement {
-
-  @NotNull
-  PsiReference getReference();
+public interface QiqOtherDocText extends PsiElement {
 
 }

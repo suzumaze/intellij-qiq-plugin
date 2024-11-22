@@ -10,16 +10,15 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.suzumaze.intellijqiqplugin.psi.QiqTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.suzumaze.intellijqiqplugin.psi.*;
-import com.intellij.psi.PsiReference;
 
-public class QiqQualifiedNameImpl extends ASTWrapperPsiElement implements QiqQualifiedName {
+public class QiqDocElementImpl extends ASTWrapperPsiElement implements QiqDocElement {
 
-  public QiqQualifiedNameImpl(@NotNull ASTNode node) {
+  public QiqDocElementImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull QiqVisitor visitor) {
-    visitor.visitQualifiedName(this);
+    visitor.visitDocElement(this);
   }
 
   @Override
@@ -29,9 +28,15 @@ public class QiqQualifiedNameImpl extends ASTWrapperPsiElement implements QiqQua
   }
 
   @Override
-  @NotNull
-  public PsiReference getReference() {
-    return QiqPsiImplUtil.getReference(this);
+  @Nullable
+  public QiqOtherDocText getOtherDocText() {
+    return findChildByClass(QiqOtherDocText.class);
+  }
+
+  @Override
+  @Nullable
+  public QiqTagVar getTagVar() {
+    return findChildByClass(QiqTagVar.class);
   }
 
 }

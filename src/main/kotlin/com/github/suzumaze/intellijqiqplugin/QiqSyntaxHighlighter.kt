@@ -3,7 +3,6 @@ package com.github.suzumaze.intellijqiqplugin
 import com.github.suzumaze.intellijqiqplugin.psi.QiqTypes
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
-import com.intellij.openapi.editor.HighlighterColors
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.tree.IElementType
@@ -51,6 +50,15 @@ class QiqSyntaxHighlighter : SyntaxHighlighterBase() {
         val DOC_COMMENT = TextAttributesKey.createTextAttributesKey(
             "QIQ.DOC_COMMENT", DefaultLanguageHighlighterColors.DOC_COMMENT
         )
+        var DOC_TAG_NAME = TextAttributesKey.createTextAttributesKey(
+            "QIQ.DOC_TAG_NAME", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG
+        )
+        var DOC_QUALIFIED_NAME = TextAttributesKey.createTextAttributesKey(
+            "QIQ.DOC_QUALIFIED_NAME", DefaultLanguageHighlighterColors.DOC_COMMENT_MARKUP
+        )
+        var DOC_VARIABLE = TextAttributesKey.createTextAttributesKey(
+            "QIQ.DOC_VARIABLE", DefaultLanguageHighlighterColors.INSTANCE_FIELD
+        )
 
         // 演算子
         val OPERATOR = TextAttributesKey.createTextAttributesKey(
@@ -75,6 +83,7 @@ class QiqSyntaxHighlighter : SyntaxHighlighterBase() {
                 pack(PHP_CODE)
 
             // キーワード
+            QiqTypes.USE,
             QiqTypes.AS ->
                 pack(KEYWORD)
 
@@ -93,8 +102,13 @@ class QiqSyntaxHighlighter : SyntaxHighlighterBase() {
             // コメント
             QiqTypes.LINE_COMMENT ->
                 pack(LINE_COMMENT)
-            QiqTypes.DOC_COMMENT ->
+            QiqTypes.DOC_COMMENT_START,
+            QiqTypes.DOC_COMMENT_END ->
                 pack(DOC_COMMENT)
+
+            QiqTypes.DOC_TAG_NAME -> pack(DOC_TAG_NAME)
+            QiqTypes.DOC_QUALIFIED_NAME -> pack(DOC_QUALIFIED_NAME)
+            QiqTypes.DOC_VARIABLE -> pack(DOC_VARIABLE)
 
             // 演算子
             QiqTypes.PLUS, QiqTypes.MINUS, QiqTypes.MULTIPLY, QiqTypes.DIVIDE,

@@ -21,6 +21,7 @@ class QiqLexer implements FlexLexer {
   public static final int YYINITIAL = 0;
   public static final int IN_QIQ = 2;
   public static final int IN_PHP = 4;
+  public static final int IN_DOC_COMMENT = 6;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -29,7 +30,7 @@ class QiqLexer implements FlexLexer {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = {
-     0,  0,  1,  1,  2, 2
+     0,  0,  1,  1,  2,  2,  3, 3
   };
 
   /**
@@ -38,7 +39,7 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_CMAP_TOP = zzUnpackcmap_top();
 
   private static final String ZZ_CMAP_TOP_PACKED_0 =
-    "\1\0\37\u0100\1\u0200\u10df\u0100";
+    "\1\0\37\u0100\1\u0200\267\u0100\10\u0300\u1020\u0100";
 
   private static int [] zzUnpackcmap_top() {
     int [] result = new int[4352];
@@ -69,14 +70,14 @@ class QiqLexer implements FlexLexer {
     "\11\0\1\1\1\2\1\3\1\1\1\4\22\0\1\1"+
     "\1\5\1\6\1\0\1\7\1\10\1\11\1\12\1\13"+
     "\1\14\1\15\1\16\1\17\1\20\1\21\1\22\12\23"+
-    "\1\24\1\25\1\26\1\27\1\30\1\31\1\0\32\32"+
-    "\1\33\1\34\1\35\1\0\1\32\1\0\1\36\1\32"+
-    "\1\37\1\32\1\40\2\32\1\41\1\32\1\37\5\32"+
-    "\1\42\2\32\1\43\1\32\1\44\5\32\1\45\1\46"+
-    "\1\47\1\50\6\0\1\3\u01a2\0\2\3\326\0";
+    "\1\24\1\25\1\26\1\27\1\30\1\31\1\32\32\33"+
+    "\1\34\1\35\1\36\1\0\1\37\1\0\1\40\1\33"+
+    "\1\41\1\33\1\42\2\33\1\43\1\33\1\41\5\33"+
+    "\1\44\2\33\1\45\1\33\1\46\5\33\1\47\1\50"+
+    "\1\51\1\52\6\0\1\3\u01a2\0\2\3\326\0\u0100\53";
 
   private static int [] zzUnpackcmap_blocks() {
-    int [] result = new int[768];
+    int [] result = new int[1024];
     int offset = 0;
     offset = zzUnpackcmap_blocks(ZZ_CMAP_BLOCKS_PACKED_0, offset, result);
     return result;
@@ -100,18 +101,19 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\3\0\3\1\1\2\1\3\2\4\1\5\2\2\1\6"+
+    "\4\0\3\1\1\2\1\3\2\4\1\5\2\2\1\6"+
     "\2\2\1\7\1\10\1\11\1\12\1\13\1\14\1\15"+
-    "\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25"+
-    "\1\26\1\27\1\30\2\25\3\2\1\31\1\2\1\0"+
-    "\1\32\1\33\1\0\1\34\1\0\1\35\1\36\1\0"+
-    "\1\37\1\0\1\40\1\0\1\41\1\17\1\42\1\43"+
-    "\1\44\1\45\1\46\1\25\1\47\1\50\1\0\1\31"+
-    "\1\51\1\52\1\0\1\53\1\32\1\54\1\0\1\55"+
-    "\1\56\2\0\1\57\1\60";
+    "\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\2"+
+    "\1\25\1\26\1\27\1\30\2\25\3\2\1\31\1\2"+
+    "\4\32\1\33\1\0\1\34\1\35\1\0\1\36\1\0"+
+    "\1\37\1\40\1\0\1\41\1\0\1\42\1\0\1\43"+
+    "\1\17\1\44\1\45\1\46\1\47\1\0\1\50\1\25"+
+    "\1\51\1\52\1\0\1\31\1\53\1\54\1\55\1\56"+
+    "\1\57\1\0\1\60\1\34\1\61\1\62\1\63\1\64"+
+    "\1\65\1\0\1\66";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[79];
+    int [] result = new int[89];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -136,19 +138,21 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\51\0\122\0\173\0\244\0\315\0\366\0\u011f"+
-    "\0\366\0\u0148\0\u0171\0\u019a\0\u01c3\0\366\0\u01ec\0\u0215"+
-    "\0\366\0\366\0\366\0\366\0\366\0\u023e\0\366\0\u0267"+
-    "\0\u0290\0\366\0\366\0\u02b9\0\u02e2\0\u030b\0\u0334\0\366"+
-    "\0\366\0\366\0\u035d\0\u0386\0\u03af\0\u03d8\0\u0401\0\u042a"+
-    "\0\u0453\0\u047c\0\u04a5\0\u04ce\0\u019a\0\366\0\u04f7\0\u0520"+
-    "\0\366\0\u0215\0\366\0\u0549\0\366\0\u0572\0\u059b\0\u05c4"+
-    "\0\366\0\u05ed\0\366\0\366\0\u0334\0\u0616\0\366\0\366"+
-    "\0\u03d8\0\366\0\366\0\366\0\u063f\0\366\0\366\0\366"+
-    "\0\u0668\0\366\0\u0334\0\u0691\0\u06ba\0\366\0\366";
+    "\0\0\0\54\0\130\0\204\0\260\0\334\0\u0108\0\u0134"+
+    "\0\u0160\0\u0134\0\u018c\0\u01b8\0\u01e4\0\u0210\0\u0134\0\u023c"+
+    "\0\u0268\0\u0134\0\u0134\0\u0134\0\u0134\0\u0134\0\u0294\0\u0134"+
+    "\0\u02c0\0\u02ec\0\u0134\0\u0134\0\u0318\0\u0344\0\u0370\0\u039c"+
+    "\0\u03c8\0\u0134\0\u0134\0\u0134\0\u03f4\0\u0420\0\u044c\0\u0478"+
+    "\0\u04a4\0\u04d0\0\u04fc\0\u0134\0\u0528\0\u0554\0\u0580\0\u05ac"+
+    "\0\u05d8\0\u0604\0\u0630\0\u01e4\0\u0134\0\u065c\0\u0688\0\u0134"+
+    "\0\u0268\0\u0134\0\u06b4\0\u0134\0\u06e0\0\u070c\0\u0738\0\u0134"+
+    "\0\u0764\0\u0134\0\u0134\0\u0790\0\u03c8\0\u07bc\0\u0134\0\u0134"+
+    "\0\u0478\0\u0134\0\u0134\0\u07e8\0\u0134\0\u0580\0\u0134\0\u0814"+
+    "\0\u0134\0\u0134\0\u0134\0\u0134\0\u0134\0\u0134\0\u03c8\0\u0840"+
+    "\0\u0134";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[79];
+    int [] result = new int[89];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -171,35 +175,40 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\26\4\1\5\16\4\1\6\3\4\1\7\2\10\1\11"+
-    "\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21"+
-    "\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31"+
-    "\1\32\1\33\1\34\1\35\1\36\1\7\1\37\1\40"+
-    "\1\41\1\42\1\43\5\37\1\44\1\7\1\45\1\46"+
-    "\1\47\30\50\1\7\1\51\17\50\26\4\1\0\16\4"+
-    "\1\0\3\4\31\0\1\52\64\0\1\53\55\0\2\10"+
-    "\50\0\1\11\75\0\1\54\21\0\2\55\1\0\1\55"+
-    "\1\0\1\55\1\56\25\55\1\57\14\55\32\0\1\60"+
-    "\3\0\7\60\15\0\1\61\37\0\2\62\1\0\1\62"+
-    "\1\0\5\62\1\63\21\62\1\64\14\62\30\0\1\65"+
-    "\35\0\1\66\4\0\1\67\47\0\1\70\1\0\1\31"+
-    "\54\0\1\71\50\0\1\72\1\73\47\0\1\74\44\0"+
-    "\1\37\6\0\1\37\3\0\7\37\27\0\1\37\6\0"+
-    "\1\37\3\0\5\37\1\75\1\37\27\0\1\37\6\0"+
-    "\1\37\3\0\5\37\1\76\1\37\52\0\1\77\51\0"+
-    "\1\100\50\0\1\101\1\0\31\50\1\0\17\50\30\102"+
-    "\1\103\20\102\27\0\1\104\12\0\1\105\35\0\1\106"+
-    "\6\0\2\107\1\0\1\107\2\0\1\107\33\0\1\110"+
-    "\21\0\2\55\1\0\1\55\1\0\44\55\23\0\1\60"+
-    "\6\0\1\60\3\0\7\60\4\0\2\62\1\0\1\62"+
-    "\1\0\44\62\15\0\1\111\33\0\2\67\1\0\1\67"+
-    "\1\0\42\67\1\0\1\67\23\0\1\70\54\0\1\112"+
-    "\44\0\1\37\6\0\1\37\3\0\2\37\1\113\4\37"+
-    "\45\0\1\114\7\0\15\111\1\115\33\111\42\0\1\116"+
-    "\6\0\22\111\1\117\26\111";
+    "\26\5\1\6\20\5\1\7\4\5\1\10\2\11\1\12"+
+    "\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22"+
+    "\1\23\1\24\1\25\1\26\1\27\1\30\1\31\1\32"+
+    "\1\33\1\34\1\35\1\36\1\37\1\40\1\10\1\41"+
+    "\1\42\1\43\1\44\1\41\1\45\5\41\1\46\1\10"+
+    "\1\47\1\50\1\51\1\10\30\52\1\10\1\53\22\52"+
+    "\1\54\2\11\2\10\2\54\1\55\5\54\1\56\14\54"+
+    "\1\57\1\60\1\54\1\43\1\54\10\60\4\54\1\10"+
+    "\26\5\1\0\20\5\1\0\4\5\31\0\1\61\71\0"+
+    "\1\62\61\0\2\11\53\0\1\12\100\0\1\63\24\0"+
+    "\2\64\1\0\1\64\1\0\1\64\1\65\26\64\1\66"+
+    "\16\64\33\0\1\67\3\0\10\67\16\0\1\70\42\0"+
+    "\2\71\1\0\1\71\1\0\5\71\1\72\22\71\1\73"+
+    "\16\71\30\0\1\74\40\0\1\75\4\0\1\76\52\0"+
+    "\1\77\1\0\1\32\57\0\1\100\53\0\1\101\1\102"+
+    "\52\0\1\103\44\0\1\104\56\0\1\41\7\0\1\41"+
+    "\3\0\10\41\30\0\1\41\7\0\1\41\3\0\6\41"+
+    "\1\105\1\41\30\0\1\41\7\0\1\41\3\0\6\41"+
+    "\1\106\1\41\55\0\1\107\54\0\1\110\53\0\1\111"+
+    "\2\0\31\52\1\0\22\52\30\112\1\113\23\112\33\0"+
+    "\1\114\3\0\10\114\27\0\1\115\64\0\1\116\4\0"+
+    "\7\116\30\0\1\60\7\0\1\60\3\0\10\60\34\0"+
+    "\1\117\14\0\1\120\36\0\1\121\10\0\2\122\1\0"+
+    "\1\122\2\0\1\122\34\0\1\123\24\0\2\64\1\0"+
+    "\1\64\1\0\47\64\23\0\1\67\7\0\1\67\3\0"+
+    "\10\67\5\0\2\71\1\0\1\71\1\0\47\71\15\0"+
+    "\1\124\36\0\2\76\1\0\1\76\1\0\44\76\1\0"+
+    "\2\76\23\0\1\77\57\0\1\125\54\0\1\126\46\0"+
+    "\1\41\7\0\1\41\3\0\3\41\1\127\4\41\30\0"+
+    "\1\114\7\0\1\114\3\0\10\114\50\0\1\130\54\0"+
+    "\1\131\7\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[1763];
+    int [] result = new int[2156];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -237,15 +246,15 @@ class QiqLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\3\0\3\1\1\11\1\1\1\11\4\1\1\11\2\1"+
-    "\5\11\1\1\1\11\2\1\2\11\4\1\3\11\7\1"+
-    "\1\0\2\1\1\0\1\11\1\0\1\1\1\11\1\0"+
-    "\1\11\1\0\1\11\1\0\2\1\1\11\1\1\2\11"+
-    "\2\1\2\11\1\0\3\11\1\0\3\11\1\0\1\11"+
-    "\1\1\2\0\2\11";
+    "\4\0\3\1\1\11\1\1\1\11\4\1\1\11\2\1"+
+    "\5\11\1\1\1\11\2\1\2\11\5\1\3\11\7\1"+
+    "\1\11\4\1\1\0\2\1\1\0\1\11\1\0\1\1"+
+    "\1\11\1\0\1\11\1\0\1\11\1\0\2\1\1\11"+
+    "\1\1\2\11\1\0\2\1\2\11\1\0\2\11\1\1"+
+    "\1\11\1\1\1\11\1\0\6\11\1\1\1\0\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[79];
+    int [] result = new int[89];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -570,242 +579,272 @@ class QiqLexer implements FlexLexer {
             { return QiqTypes.TEMPLATE_TEXT;
             }
           // fall through
-          case 49: break;
+          case 55: break;
           case 2:
             { return TokenType.BAD_CHARACTER;
             }
           // fall through
-          case 50: break;
+          case 56: break;
           case 3:
             { return TokenType.WHITE_SPACE;
             }
           // fall through
-          case 51: break;
+          case 57: break;
           case 4:
             { return QiqTypes.CRLF;
             }
           // fall through
-          case 52: break;
+          case 58: break;
           case 5:
             { return QiqTypes.NOT_OP;
             }
           // fall through
-          case 53: break;
+          case 59: break;
           case 6:
             { return QiqTypes.MOD;
             }
           // fall through
-          case 54: break;
+          case 60: break;
           case 7:
             { return QiqTypes.LEFT_PAREN;
             }
           // fall through
-          case 55: break;
+          case 61: break;
           case 8:
             { return QiqTypes.RIGHT_PAREN;
             }
           // fall through
-          case 56: break;
+          case 62: break;
           case 9:
             { return QiqTypes.MULTIPLY;
             }
           // fall through
-          case 57: break;
+          case 63: break;
           case 10:
             { return QiqTypes.PLUS;
             }
           // fall through
-          case 58: break;
+          case 64: break;
           case 11:
             { return QiqTypes.COMMA;
             }
           // fall through
-          case 59: break;
+          case 65: break;
           case 12:
             { return QiqTypes.MINUS;
             }
           // fall through
-          case 60: break;
+          case 66: break;
           case 13:
             { return QiqTypes.DOT;
             }
           // fall through
-          case 61: break;
+          case 67: break;
           case 14:
             { return QiqTypes.DIVIDE;
             }
           // fall through
-          case 62: break;
+          case 68: break;
           case 15:
             { return QiqTypes.NUMBER;
             }
           // fall through
-          case 63: break;
+          case 69: break;
           case 16:
             { return QiqTypes.COLON;
             }
           // fall through
-          case 64: break;
+          case 70: break;
           case 17:
             { return QiqTypes.SEMICOLON;
             }
           // fall through
-          case 65: break;
+          case 71: break;
           case 18:
             { return QiqTypes.LESS_THAN;
             }
           // fall through
-          case 66: break;
+          case 72: break;
           case 19:
             { return QiqTypes.EQUALS;
             }
           // fall through
-          case 67: break;
+          case 73: break;
           case 20:
             { return QiqTypes.GREATER_THAN;
             }
           // fall through
-          case 68: break;
+          case 74: break;
           case 21:
             { return QiqTypes.IDENTIFIER;
             }
           // fall through
-          case 69: break;
+          case 75: break;
           case 22:
             { return QiqTypes.LEFT_BRACKET;
             }
           // fall through
-          case 70: break;
+          case 76: break;
           case 23:
             { return QiqTypes.BACKSLASH;
             }
           // fall through
-          case 71: break;
+          case 77: break;
           case 24:
             { return QiqTypes.RIGHT_BRACKET;
             }
           // fall through
-          case 72: break;
+          case 78: break;
           case 25:
             { return QiqTypes.PHP_CODE;
             }
           // fall through
-          case 73: break;
-          case 26:
-            { yybegin(IN_QIQ); return QiqTypes.QIQ_OPENING_TAG;
-            }
-          // fall through
-          case 74: break;
-          case 27:
-            { return QiqTypes.NOT_EQUAL;
-            }
-          // fall through
-          case 75: break;
-          case 28:
-            { return QiqTypes.DOUBLE_QUOTED_STRING;
-            }
-          // fall through
-          case 76: break;
-          case 29:
-            { return QiqTypes.VARIABLE;
-            }
-          // fall through
-          case 77: break;
-          case 30:
-            { return QiqTypes.AND_OP;
-            }
-          // fall through
-          case 78: break;
-          case 31:
-            { return QiqTypes.SINGLE_QUOTED_STRING;
-            }
-          // fall through
           case 79: break;
-          case 32:
-            { return QiqTypes.OBJECT_OPERATOR;
+          case 26:
+            { return QiqTypes.DOC_COMMENT_TEXT;
             }
           // fall through
           case 80: break;
-          case 33:
-            { return QiqTypes.LINE_COMMENT;
+          case 27:
+            { return QiqTypes.DOC_IDENTIFIER;
             }
           // fall through
           case 81: break;
-          case 34:
-            { return QiqTypes.LESS_EQUAL;
+          case 28:
+            { yybegin(IN_QIQ); return QiqTypes.QIQ_OPENING_TAG;
             }
           // fall through
           case 82: break;
-          case 35:
-            { return QiqTypes.EQUAL_TO;
+          case 29:
+            { return QiqTypes.NOT_EQUAL;
             }
           // fall through
           case 83: break;
-          case 36:
-            { return QiqTypes.ARROW;
+          case 30:
+            { return QiqTypes.DOUBLE_QUOTED_STRING;
             }
           // fall through
           case 84: break;
-          case 37:
-            { return QiqTypes.GREATER_EQUAL;
+          case 31:
+            { return QiqTypes.VARIABLE;
             }
           // fall through
           case 85: break;
-          case 38:
-            { return QiqTypes.AS;
+          case 32:
+            { return QiqTypes.AND_OP;
             }
           // fall through
           case 86: break;
-          case 39:
-            { return QiqTypes.OR_OP;
+          case 33:
+            { return QiqTypes.SINGLE_QUOTED_STRING;
             }
           // fall through
           case 87: break;
-          case 40:
-            { yybegin(YYINITIAL); return QiqTypes.QIQ_CLOSING_TAG;
+          case 34:
+            { return QiqTypes.OBJECT_OPERATOR;
             }
           // fall through
           case 88: break;
-          case 41:
-            { yybegin(YYINITIAL); return QiqTypes.PHP_CLOSING_TAG;
+          case 35:
+            { return QiqTypes.LINE_COMMENT;
             }
           // fall through
           case 89: break;
-          case 42:
-            { yybegin(IN_PHP); return QiqTypes.PHP_ECHO_OPENING_TAG;
+          case 36:
+            { return QiqTypes.LESS_EQUAL;
             }
           // fall through
           case 90: break;
-          case 43:
-            { yybegin(IN_QIQ); return QiqTypes.QIQ_ECHO_OPENING_TAG;
+          case 37:
+            { return QiqTypes.EQUAL_TO;
             }
           // fall through
           case 91: break;
-          case 44:
-            { return QiqTypes.NOT_IDENTICAL;
+          case 38:
+            { return QiqTypes.ARROW;
             }
           // fall through
           case 92: break;
-          case 45:
-            { return QiqTypes.IDENTICAL;
+          case 39:
+            { return QiqTypes.GREATER_EQUAL;
             }
           // fall through
           case 93: break;
-          case 46:
-            { return QiqTypes.USE;
+          case 40:
+            { return QiqTypes.AS;
             }
           // fall through
           case 94: break;
-          case 47:
-            { yybegin(IN_PHP); return QiqTypes.PHP_OPENING_TAG;
+          case 41:
+            { return QiqTypes.OR_OP;
             }
           // fall through
           case 95: break;
-          case 48:
-            { return QiqTypes.DOC_COMMENT;
+          case 42:
+            { yybegin(YYINITIAL); return QiqTypes.QIQ_CLOSING_TAG;
             }
           // fall through
           case 96: break;
+          case 43:
+            { yybegin(YYINITIAL); return QiqTypes.PHP_CLOSING_TAG;
+            }
+          // fall through
+          case 97: break;
+          case 44:
+            { return QiqTypes.DOC_VARIABLE;
+            }
+          // fall through
+          case 98: break;
+          case 45:
+            { yybegin(IN_QIQ); return QiqTypes.DOC_COMMENT_END;
+            }
+          // fall through
+          case 99: break;
+          case 46:
+            { return QiqTypes.DOC_TAG_NAME;
+            }
+          // fall through
+          case 100: break;
+          case 47:
+            { yybegin(IN_PHP); return QiqTypes.PHP_ECHO_OPENING_TAG;
+            }
+          // fall through
+          case 101: break;
+          case 48:
+            { yybegin(IN_QIQ); return QiqTypes.QIQ_ECHO_OPENING_TAG;
+            }
+          // fall through
+          case 102: break;
+          case 49:
+            { return QiqTypes.NOT_IDENTICAL;
+            }
+          // fall through
+          case 103: break;
+          case 50:
+            { yybegin(IN_DOC_COMMENT); return QiqTypes.DOC_COMMENT_START;
+            }
+          // fall through
+          case 104: break;
+          case 51:
+            { return QiqTypes.IDENTICAL;
+            }
+          // fall through
+          case 105: break;
+          case 52:
+            { return QiqTypes.NULL_SAFE_OPERATOR;
+            }
+          // fall through
+          case 106: break;
+          case 53:
+            { return QiqTypes.USE;
+            }
+          // fall through
+          case 107: break;
+          case 54:
+            { yybegin(IN_PHP); return QiqTypes.PHP_OPENING_TAG;
+            }
+          // fall through
+          case 108: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

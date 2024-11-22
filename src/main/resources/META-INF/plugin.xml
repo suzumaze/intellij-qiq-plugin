@@ -22,7 +22,9 @@
                 implementationClass="com.github.suzumaze.intellijqiqplugin.QiqSyntaxHighlighterFactory"/>
         <colorSettingsPage
                 implementation="com.github.suzumaze.intellijqiqplugin.QiqColorSettingsPage"/>
-        <editorHighlighterProvider filetype="Qiq" implementationClass="com.github.suzumaze.intellijqiqplugin.QiqEditorHighlighterProvider"/>
+        <editorHighlighterProvider
+                filetype="Qiq"
+                implementationClass="com.github.suzumaze.intellijqiqplugin.QiqEditorHighlighterProvider"/>
         <lang.formatter
                 language="Qiq"
                 implementationClass="com.github.suzumaze.intellijqiqplugin.QiqFormattingModelBuilder"/>
@@ -30,6 +32,11 @@
                 implementation="com.github.suzumaze.intellijqiqplugin.QiqCodeStyleSettingsProvider"/>
         <langCodeStyleSettingsProvider
                 implementation="com.github.suzumaze.intellijqiqplugin.QiqLanguageCodeStyleSettingsProvider"/>
-        <psi.referenceContributor language="Qiq" implementation="com.github.suzumaze.intellijqiqplugin.QiqReferenceContributor"/>
+        <psi.referenceContributor
+                language="Qiq"
+                implementation="com.github.suzumaze.intellijqiqplugin.QiqReferenceContributor"/>
+        <completion.contributor
+                language="Qiq"
+                implementationClass="com.github.suzumaze.intellijqiqplugin.QiqCompletionContributor"/>
     </extensions>
 </idea-plugin>
