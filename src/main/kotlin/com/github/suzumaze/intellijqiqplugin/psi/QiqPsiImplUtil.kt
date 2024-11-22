@@ -1,10 +1,7 @@
-package com.github.suzumaze.intellijqiqplugin.psi.impl
+package com.github.suzumaze.intellijqiqplugin.psi
 
 import com.github.suzumaze.intellijqiqplugin.QiqClassReference
 import com.github.suzumaze.intellijqiqplugin.QiqReference
-import com.github.suzumaze.intellijqiqplugin.psi.QiqDocQualifiedName
-import com.github.suzumaze.intellijqiqplugin.psi.QiqQualifiedName
-import com.github.suzumaze.intellijqiqplugin.psi.QiqStringLiteral
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiReference
 
