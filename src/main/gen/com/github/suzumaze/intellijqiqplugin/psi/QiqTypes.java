@@ -13,6 +13,7 @@ public interface QiqTypes {
   IElementType DOC_ELEMENT = new QiqElementType("DOC_ELEMENT");
   IElementType DOC_QUALIFIED_NAME = new QiqElementType("DOC_QUALIFIED_NAME");
   IElementType EXPRESSION = new QiqElementType("EXPRESSION");
+  IElementType FUNCTION = new QiqElementType("FUNCTION");
   IElementType FUNCTION_CALL = new QiqElementType("FUNCTION_CALL");
   IElementType NAMED_ARGUMENT = new QiqElementType("NAMED_ARGUMENT");
   IElementType OTHER_DOC_TEXT = new QiqElementType("OTHER_DOC_TEXT");
@@ -93,6 +94,9 @@ public interface QiqTypes {
       }
       else if (type == EXPRESSION) {
         return new QiqExpressionImpl(node);
+      }
+      else if (type == FUNCTION) {
+        return new QiqFunctionImpl(node);
       }
       else if (type == FUNCTION_CALL) {
         return new QiqFunctionCallImpl(node);

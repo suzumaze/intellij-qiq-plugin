@@ -26,4 +26,9 @@ object QiqPsiImplUtil {
     fun getReference(element: QiqDocQualifiedName): PsiReference {
         return QiqClassReference(element, element.text)
     }
+
+    @JvmStatic
+    fun getReference(element: QiqFunction): PsiReference {
+        return QiqClassReference(element, element.text)
+    }
 }

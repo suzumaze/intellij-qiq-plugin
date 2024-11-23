@@ -12,7 +12,7 @@
  elementTypeClass="com.github.suzumaze.intellijqiqplugin.psi.QiqElementType"
  tokenTypeClass="com.github.suzumaze.intellijqiqplugin.psi.QiqTokenType"
 
- psiImplUtilClass="com.github.suzumaze.intellijqiqplugin.psi.impl.QiqPsiImplUtil"
+ psiImplUtilClass="com.github.suzumaze.intellijqiqplugin.psi.QiqPsiImplUtil"
 }
 
 /*
@@ -51,8 +51,12 @@ statement ::= functionCall COLON?
 * - 引数ありの場合: textField(name: 'street', value: $street)
 * - 末尾カンマを許可: textField(name: 'street',)
 */
-functionCall ::= IDENTIFIER LEFT_PAREN RIGHT_PAREN
-              | IDENTIFIER LEFT_PAREN argumentList COMMA? RIGHT_PAREN
+functionCall ::= function LEFT_PAREN RIGHT_PAREN
+              | function LEFT_PAREN argumentList COMMA? RIGHT_PAREN
+
+function ::= IDENTIFIER {
+    methods=[getReference]
+}
 
 private argumentList ::= argument (COMMA argument)*
 

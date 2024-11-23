@@ -512,25 +512,49 @@ public class QiqParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IDENTIFIER LEFT_PAREN RIGHT_PAREN
-  //               | IDENTIFIER LEFT_PAREN argumentList COMMA? RIGHT_PAREN
+  // IDENTIFIER
+  public static boolean function(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "function")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    exit_section_(b, m, FUNCTION, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // function LEFT_PAREN RIGHT_PAREN
+  //               | function LEFT_PAREN argumentList COMMA? RIGHT_PAREN
   public static boolean functionCall(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "functionCall")) return false;
     if (!nextTokenIs(b, IDENTIFIER)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = parseTokens(b, 0, IDENTIFIER, LEFT_PAREN, RIGHT_PAREN);
+    r = functionCall_0(b, l + 1);
     if (!r) r = functionCall_1(b, l + 1);
     exit_section_(b, m, FUNCTION_CALL, r);
     return r;
   }
 
-  // IDENTIFIER LEFT_PAREN argumentList COMMA? RIGHT_PAREN
+  // function LEFT_PAREN RIGHT_PAREN
+  private static boolean functionCall_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "functionCall_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = function(b, l + 1);
+    r = r && consumeTokens(b, 0, LEFT_PAREN, RIGHT_PAREN);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // function LEFT_PAREN argumentList COMMA? RIGHT_PAREN
   private static boolean functionCall_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "functionCall_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, IDENTIFIER, LEFT_PAREN);
+    r = function(b, l + 1);
+    r = r && consumeToken(b, LEFT_PAREN);
     r = r && argumentList(b, l + 1);
     r = r && functionCall_1_3(b, l + 1);
     r = r && consumeToken(b, RIGHT_PAREN);

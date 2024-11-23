@@ -27,6 +27,10 @@ public class QiqVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitFunction(@NotNull QiqFunction o) {
+    visitPsiElement(o);
+  }
+
   public void visitFunctionCall(@NotNull QiqFunctionCall o) {
     visitPsiElement(o);
   }
